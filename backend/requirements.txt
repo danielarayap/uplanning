@@ -15,5 +15,6 @@ PyYAML==5.1.2
 requests==2.22.0
 six==1.12.0
 swagger-ui-bundle==0.0.5
+tinydb==3.13.0
 urllib3==1.25.3
 Werkzeug==0.15.5
