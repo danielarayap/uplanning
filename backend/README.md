@@ -15,3 +15,6 @@ python server.py
 En serio, eso es todo.
 
 Ahora puedes ir a <http://localhost:5000/api/ui/> y jugar con la API.
+
+# Como funciona
+Me da paja documentarlo, me puedes preguntar directamente.
