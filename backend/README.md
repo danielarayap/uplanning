@@ -18,3 +18,6 @@ Ahora puedes ir a <http://localhost:5000/api/ui/> y jugar con la API.
 
 # Como funciona
 Me da paja documentarlo, me puedes preguntar directamente.
+
+# TODOS
+* parsear el documento que nos entrego sergio y popular un poco la db. Hacerlo directamente y aprovechar de provar el sdk.
