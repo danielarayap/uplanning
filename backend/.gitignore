@@ -2,3 +2,6 @@ __pycache__
 
 env
 venv
+
+db.json
+test-db.json
