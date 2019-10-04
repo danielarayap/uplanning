@@ -8,4 +8,5 @@ export default class Manager extends React.Component {
       </div>
     )
   }
+  
 }
