@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Header from "./Header";
 import Calendar from "./Calendar";
-import Manager from "./Manager"
+import Manager from "./Manager";
+import NewSemester from "./NewSemester";
+import AdminSemester from "./AdminSemester";
+import AdminCourse from "./AdminCourse";
 
 class App extends React.Component {
   render() {
@@ -17,6 +20,9 @@ class App extends React.Component {
           <Route exact path="/" component={Calendar} />
           <Route path="/calendar" component={Calendar} />
           <Route path="/manage" component={Manager} />
+          <Route path="/new_semester" component={NewSemester} />
+          <Route path="/manage/:semester/:course" component={AdminCourse} />
+          <Route path="/manage/:semester" component={AdminSemester} />
         </div>
       </Router>
     );
