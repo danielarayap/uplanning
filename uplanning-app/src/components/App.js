@@ -7,6 +7,7 @@ import Manager from "./Manager";
 import NewSemester from "./NewSemester";
 import AdminSemester from "./AdminSemester";
 import AdminCourse from "./AdminCourse";
+import NewEvaluation from "./NewEvaluation";
 
 class App extends React.Component {
   render() {
@@ -23,6 +24,7 @@ class App extends React.Component {
           <Route path="/new_semester" component={NewSemester} />
           <Route path="/manage/:semester/:course" component={AdminCourse} />
           <Route path="/manage/:semester" component={AdminSemester} />
+          <Route path="/new_evaluation/:semester/:course/:section/:evaluation" component={NewEvaluation} />
         </div>
       </Router>
     );
