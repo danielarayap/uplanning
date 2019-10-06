@@ -33,3 +33,17 @@ ol, ul {
 #semester-create-btn {
 	float: right;
 }
+
+#load-semester {
+	display: inline-block;
+	width: 50%;
+}
+
+#copy-semester {
+	display: inline-block;
+	width: 50%;
+}
+
+#new-semester-buttons {
+	margin-top: 15px;
+}
