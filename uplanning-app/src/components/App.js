@@ -2,11 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Header from "./Header";
-import Calendar from "./Calendar";
+import Calendar from "./calendar";
 import Manager from "./Manager";
 import NewSemester from "./NewSemester";
 import AdminSemester from "./AdminSemester";
 import AdminCourse from "./AdminCourse";
+import NewEvaluation from "./NewEvaluation";
 
 class App extends React.Component {
   render() {
