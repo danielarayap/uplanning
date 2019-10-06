@@ -30,7 +30,9 @@ const LoggedOutView = props => {
       </li>
 
       <li className="nav-item">
-          #USUARIO_PLACEHOLDER
+          <Link to="/login">
+            Login
+          </Link>
       </li>
 
     </ul>

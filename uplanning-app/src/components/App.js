@@ -1,20 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import Header from "./Header";
-import Calendar from "./calendar";
-import Manager from "./Manager";
-import NewSemester from "./NewSemester";
-import AdminSemester from "./AdminSemester";
-import AdminCourse from "./AdminCourse";
-import NewEvaluation from "./NewEvaluation";
+import Home from "./Home";
+import Login from "./Login"
 
 class App extends React.Component {
   render() {
     return (
       <Router>
         <div>
-          <Header
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Home} />
+          {/*<Header
             appName={this.props.appName}
             currentUser={this.props.currentUser}
           />
@@ -23,7 +20,7 @@ class App extends React.Component {
           <Route exact path="/manage" component={Manager} />
           <Route exact path="/manage/new_semester" component={NewSemester} />
           <Route exact path="/manage/:year/:semester" component={AdminSemester} />
-          <Route exact path="/manage/:year/:semester/:course/:section" component={AdminCourse} />
+          <Route exact path="/manage/:year/:semester/:course/:section" component={AdminCourse} />*/}
         </div>
       </Router>
     );
