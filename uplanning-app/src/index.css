@@ -11,3 +11,39 @@ ol, ul {
   background: #ddd;
 }
 
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.game-info {
+  margin-left: 20px;
+}
+
+.list-item {
+	background: lightblue;
+	margin: 5px;
+}
+
+.list-item-field {
+	display: inline-block;
+	padding: 5px 50px 5px 50px;
+}
+
+#semester-create-btn {
+	float: right;
+}
+
+#load-semester {
+	display: inline-block;
+	width: 50%;
+}
+
+#copy-semester {
+	display: inline-block;
+	width: 50%;
+}
+
+#new-semester-buttons {
+	margin-top: 15px;
+}
