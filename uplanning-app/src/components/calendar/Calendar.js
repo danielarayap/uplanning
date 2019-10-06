@@ -3,12 +3,14 @@ import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import events from "./events";
 
+import "./styles.scss";
+
 const localizer = momentLocalizer(moment);
 
 export default class Calendar extends React.Component {
   render() {
     return (
-      <div>
+      <div className="example">
         <BigCalendar
           localizer={localizer}
           events={events}
