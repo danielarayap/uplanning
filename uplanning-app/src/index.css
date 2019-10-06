@@ -22,11 +22,14 @@ ol, ul {
 
 .list-item {
 	background: lightblue;
-	border: 1px solid black;
 	margin: 5px;
 }
 
 .list-item-field {
 	display: inline-block;
 	padding: 5px 50px 5px 50px;
+}
+
+#semester-create-btn {
+	float: right;
 }

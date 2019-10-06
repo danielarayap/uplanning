@@ -5,6 +5,10 @@ class List extends React.Component {
 	render() {
 		return (
 			<div>
+				<h1>Todos los semestres</h1>
+				<input id="semester-search-bar" type="text" name="semester-description"/>
+				<button id="semester-search-btn">Buscar</button>
+				<button id="semester-create-btn">Nuevo</button>
 				<ListItem/>
 				<ListItem/>
 				<ListItem/>
