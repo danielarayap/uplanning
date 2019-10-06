@@ -48,3 +48,17 @@ ol, ul {
 .game-info {
   margin-left: 20px;
 }
+
+/* aqui comienza the true css de la app */
+
+.list-item {
+	background: lightblue;
+	border: 1px solid black;
+	margin: 5px;
+}
+
+.list-item-field {
+	display: inline-block;
+	padding: 5px 50px 5px 50px;
+}
+
