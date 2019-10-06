@@ -18,11 +18,11 @@ class App extends React.Component {
             currentUser={this.props.currentUser}
           />
           <Route exact path="/" component={Calendar} />
-          <Route path="/calendar" component={Calendar} />
-          <Route path="/manage" component={Manager} />
-          <Route path="/new_semester" component={NewSemester} />
-          <Route path="/manage/:semester/:course" component={AdminCourse} />
-          <Route path="/manage/:semester" component={AdminSemester} />
+          <Route exact path="/calendar" component={Calendar} />
+          <Route exact path="/manage" component={Manager} />
+          <Route exact path="/manage/new_semester" component={NewSemester} />
+          <Route exact path="/manage/:year/:semester" component={AdminSemester} />
+          <Route exact path="/manage/:year/:semester/:course/:section" component={AdminCourse} />
         </div>
       </Router>
     );

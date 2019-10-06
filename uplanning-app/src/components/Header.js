@@ -18,13 +18,13 @@ const LoggedOutView = props => {
       </li>
 
       <li className="nav-item">
-        <Link to="/new_semester">
+        <Link to="/manage/new_semester">
           Nuevo Semestre
         </Link>
       </li>
 
       <li className="nav-item">
-        <Link to="/manage/2019-2">
+        <Link to="/manage/2019/2">
           Semestre 2019-2
         </Link>
       </li>
