@@ -28,14 +28,19 @@ export default class Home extends React.Component {
 
         <Switch>
           <Route exact path="/" component={Calendar} />
-          <Route path="/calendar" component={Calendar} />
+          <Route exact path="/calendar" component={Calendar} />
           <Route exact path="/manage" component={Manager} />
-          <Route path="/manage/new_semester" component={NewSemester} />
-          <Route path="/manage/:year/:semester" component={AdminSemester} />
+          <Route exact path="/manage/new_semester" component={NewSemester} />
+          <Route exact path="/manage/:year/:semester" component={AdminSemester} />
           <Route
             exact
             path="/manage/:year/:semester/:course/:section"
             component={AdminCourse}
+          />
+          <Route
+            exact
+            path="/manage/:year/:semester/:course/:section/new_evaluation"
+            component={NewEvaluation}
           />
           <Route component={NoMatch}/>
 

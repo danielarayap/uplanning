@@ -3,8 +3,6 @@ import "./css/main.css";
 
 class Course extends React.Component {
   render() {
-    const year = this.props.year;
-    const semester = this.props.semester;
     const code = this.props.code;
     const section = this.props.section;
     const route = window.location.pathname + "/" + code + "/" + section;
@@ -36,11 +34,11 @@ export default class AdminCourses extends React.Component {
         <button id="course-search-btn">Buscar</button>
         <button>Nuevo Curso</button>
 
-        <Course year={year} semester={semester} name="Algoritmos y Estructuras de Datos" section="1" code="CC3001"/>
-        <Course year={year} semester={semester} name="Algoritmos y Estructuras de Datos" section="2" code="CC3001"/>
-        <Course year={year} semester={semester} name="Matemáticas Discretas para la Computación" section="1" code="CC3002"/>
-        <Course year={year} semester={semester} name="Bases de Datos" section="1" code="CC3003"/>
-        <Course year={year} semester={semester} name="Electivo" section="1" code="CC7001"/>
+        <Course name="Algoritmos y Estructuras de Datos" section="1" code="CC3001"/>
+        <Course name="Algoritmos y Estructuras de Datos" section="2" code="CC3001"/>
+        <Course name="Matemáticas Discretas para la Computación" section="1" code="CC3002"/>
+        <Course name="Bases de Datos" section="1" code="CC3003"/>
+        <Course name="Electivo" section="1" code="CC7001"/>
       </div>
     );
   }
