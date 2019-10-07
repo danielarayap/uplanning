@@ -34,6 +34,8 @@ class LoginPage extends React.Component {
 
   render() {
     const { username, password, submitted } = this.state;
+    const { match } = this.props;
+    console.log(JSON.stringify(match));
     return (
       <div className="jumbotron">
         <div className="col-md-4 col-md-offset-8">
