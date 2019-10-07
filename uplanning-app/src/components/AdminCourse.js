@@ -5,7 +5,7 @@ class DifferentDayEvaluation extends React.Component {
     const start = this.props.start.split(" ");
     const end = this.props.end.split(" ");
 
-    if (start[0] != end[0]) {
+    if (start[0] !== end[0]) {
       return <p>{start[0]} {start[1]} - {end[0]} {end[1]}</p>;
     } else {
       return null;
@@ -18,7 +18,7 @@ class SameDateEvaluation extends React.Component {
     const start = this.props.start.split(" ");
     const end = this.props.end.split(" ");
 
-    if (start[0] == end[0]) {
+    if (start[0] === end[0]) {
       return <p>{start[0]}, {start[1]} - {end[1]}</p>;
     } else {
       return null;
