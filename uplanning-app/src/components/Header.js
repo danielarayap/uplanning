@@ -5,31 +5,31 @@ const LoggedOutView = props => {
   return (
     <ul className="nav navbar-nav pull-xs-right">
 
-      <li className="nav-item">
+      <li className="nav-link">
         <Link to="/calendar">
           Calendario
         </Link>
       </li>
 
-      <li className="nav-item">
+      <li className="nav-link">
         <Link to="/manage">
           Administrar
         </Link>
       </li>
 
-      <li className="nav-item">
+      <li className="nav-link">
         <Link to="/manage/new_semester">
           Nuevo Semestre
         </Link>
       </li>
 
-      <li className="nav-item">
+      <li className="nav-link">
         <Link to="/manage/2019/2">
           Semestre 2019-2
         </Link>
       </li>
 
-      <li className="nav-item">
+      <li className="nav-link">
           <Link to="/login">
             Login
           </Link>
@@ -42,7 +42,7 @@ const LoggedOutView = props => {
 class Header extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-light">
+      <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: "#e3f2fd"}}>
         <div className="container">
 
           <div className="navbar-brand">
