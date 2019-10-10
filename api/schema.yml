@@ -1,0 +1,253 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /evaluations/:
+    get:
+      operationId: listEvaluations
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        title:
+                          type: string
+                          maxLength: 100
+                        date:
+                          type: string
+                          format: date-time
+                        evaluation_type:
+                          enum:
+                          - 1
+                          - 2
+                        url:
+                          type: string
+                          readOnly: true
+                      required:
+                      - date
+                      - evaluation_type
+          description: ''
+    post:
+      operationId: createEvaluation
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  maxLength: 100
+                date:
+                  type: string
+                  format: date-time
+                evaluation_type:
+                  enum:
+                  - 1
+                  - 2
+              required:
+              - date
+              - evaluation_type
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 100
+                  date:
+                    type: string
+                    format: date-time
+                  evaluation_type:
+                    enum:
+                    - 1
+                    - 2
+                  url:
+                    type: string
+                    readOnly: true
+                required:
+                - date
+                - evaluation_type
+          description: ''
+  /evaluations/{id}/:
+    get:
+      operationId: retrieveEvaluation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this evaluation.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 100
+                  date:
+                    type: string
+                    format: date-time
+                  evaluation_type:
+                    enum:
+                    - 1
+                    - 2
+                  url:
+                    type: string
+                    readOnly: true
+                required:
+                - date
+                - evaluation_type
+          description: ''
+    put:
+      operationId: updateEvaluation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this evaluation.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  maxLength: 100
+                date:
+                  type: string
+                  format: date-time
+                evaluation_type:
+                  enum:
+                  - 1
+                  - 2
+              required:
+              - date
+              - evaluation_type
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 100
+                  date:
+                    type: string
+                    format: date-time
+                  evaluation_type:
+                    enum:
+                    - 1
+                    - 2
+                  url:
+                    type: string
+                    readOnly: true
+                required:
+                - date
+                - evaluation_type
+          description: ''
+    patch:
+      operationId: partial_updateEvaluation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this evaluation.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  maxLength: 100
+                date:
+                  type: string
+                  format: date-time
+                evaluation_type:
+                  enum:
+                  - 1
+                  - 2
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 100
+                  date:
+                    type: string
+                    format: date-time
+                  evaluation_type:
+                    enum:
+                    - 1
+                    - 2
+                  url:
+                    type: string
+                    readOnly: true
+                required:
+                - date
+                - evaluation_type
+          description: ''
+    delete:
+      operationId: destroyEvaluation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this evaluation.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
