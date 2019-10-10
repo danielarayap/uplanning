@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',  # INFO: esto es para usar el framework rest
+    'uplanning.apps.UplanningConfig',  # INFO: agregar al proyecto la app uplanning
 ]
 
 MIDDLEWARE = [
