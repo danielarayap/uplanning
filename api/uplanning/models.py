@@ -26,3 +26,28 @@ class Semester(models.Model):
     start = models.DateTimeField()
     finish = models.DateTimeField()
     state = models.CharField(choices=_STATE_TYPES, max_length=100, blank=False)
+
+
+class Course(models.Model):
+    section = models.IntegerField(blank=True, default=1)
+    description = models.TextField()
+    ramo = models.ForeignKey('Ramo', on_delete=models.CASCADE)
+
+
+class Ramo(models.Model):
+    _SEMESTERS = (
+        (5, "Quinto"),
+        (6, "Sexto"),
+        (7, "Septimo"),
+        (8, "Octavo"),
+        (9, "Noveno"),
+        (10, "Decimo"),
+    )
+    code = models.CharField(max_length=100, blank=False)
+    name = models.CharField(max_length=100, blank=False)
+    semester = models.IntegerField(choices=_SEMESTERS)
+
+
+class Teacher(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+
