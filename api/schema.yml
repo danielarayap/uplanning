@@ -33,8 +33,8 @@ paths:
                     type: array
                     items:
                       properties:
-                        id:
-                          type: integer
+                        url:
+                          type: string
                           readOnly: true
                         title:
                           type: string
@@ -46,9 +46,6 @@ paths:
                           enum:
                           - 1
                           - 2
-                        url:
-                          type: string
-                          readOnly: true
                       required:
                       - date
                       - evaluation_type
@@ -80,8 +77,8 @@ paths:
             application/json:
               schema:
                 properties:
-                  id:
-                    type: integer
+                  url:
+                    type: string
                     readOnly: true
                   title:
                     type: string
@@ -93,9 +90,6 @@ paths:
                     enum:
                     - 1
                     - 2
-                  url:
-                    type: string
-                    readOnly: true
                 required:
                 - date
                 - evaluation_type
@@ -116,8 +110,8 @@ paths:
             application/json:
               schema:
                 properties:
-                  id:
-                    type: integer
+                  url:
+                    type: string
                     readOnly: true
                   title:
                     type: string
@@ -129,9 +123,6 @@ paths:
                     enum:
                     - 1
                     - 2
-                  url:
-                    type: string
-                    readOnly: true
                 required:
                 - date
                 - evaluation_type
@@ -169,8 +160,8 @@ paths:
             application/json:
               schema:
                 properties:
-                  id:
-                    type: integer
+                  url:
+                    type: string
                     readOnly: true
                   title:
                     type: string
@@ -182,9 +173,6 @@ paths:
                     enum:
                     - 1
                     - 2
-                  url:
-                    type: string
-                    readOnly: true
                 required:
                 - date
                 - evaluation_type
@@ -219,8 +207,8 @@ paths:
             application/json:
               schema:
                 properties:
-                  id:
-                    type: integer
+                  url:
+                    type: string
                     readOnly: true
                   title:
                     type: string
@@ -232,9 +220,6 @@ paths:
                     enum:
                     - 1
                     - 2
-                  url:
-                    type: string
-                    readOnly: true
                 required:
                 - date
                 - evaluation_type
@@ -246,6 +231,316 @@ paths:
         in: path
         required: true
         description: A unique integer value identifying this evaluation.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /semesters/:
+    get:
+      operationId: listSemesters
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        url:
+                          type: string
+                          readOnly: true
+                        period:
+                          enum:
+                          - 1
+                          - 2
+                        year:
+                          type: integer
+                        start:
+                          type: string
+                          format: date-time
+                        finish:
+                          type: string
+                          format: date-time
+                        state:
+                          enum:
+                          - finished
+                          - current
+                          - preparing
+                      required:
+                      - period
+                      - year
+                      - start
+                      - finish
+                      - state
+          description: ''
+    post:
+      operationId: createSemester
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                period:
+                  enum:
+                  - 1
+                  - 2
+                year:
+                  type: integer
+                start:
+                  type: string
+                  format: date-time
+                finish:
+                  type: string
+                  format: date-time
+                state:
+                  enum:
+                  - finished
+                  - current
+                  - preparing
+              required:
+              - period
+              - year
+              - start
+              - finish
+              - state
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  period:
+                    enum:
+                    - 1
+                    - 2
+                  year:
+                    type: integer
+                  start:
+                    type: string
+                    format: date-time
+                  finish:
+                    type: string
+                    format: date-time
+                  state:
+                    enum:
+                    - finished
+                    - current
+                    - preparing
+                required:
+                - period
+                - year
+                - start
+                - finish
+                - state
+          description: ''
+  /semesters/{id}/:
+    get:
+      operationId: retrieveSemester
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this semester.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  period:
+                    enum:
+                    - 1
+                    - 2
+                  year:
+                    type: integer
+                  start:
+                    type: string
+                    format: date-time
+                  finish:
+                    type: string
+                    format: date-time
+                  state:
+                    enum:
+                    - finished
+                    - current
+                    - preparing
+                required:
+                - period
+                - year
+                - start
+                - finish
+                - state
+          description: ''
+    put:
+      operationId: updateSemester
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this semester.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                period:
+                  enum:
+                  - 1
+                  - 2
+                year:
+                  type: integer
+                start:
+                  type: string
+                  format: date-time
+                finish:
+                  type: string
+                  format: date-time
+                state:
+                  enum:
+                  - finished
+                  - current
+                  - preparing
+              required:
+              - period
+              - year
+              - start
+              - finish
+              - state
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  period:
+                    enum:
+                    - 1
+                    - 2
+                  year:
+                    type: integer
+                  start:
+                    type: string
+                    format: date-time
+                  finish:
+                    type: string
+                    format: date-time
+                  state:
+                    enum:
+                    - finished
+                    - current
+                    - preparing
+                required:
+                - period
+                - year
+                - start
+                - finish
+                - state
+          description: ''
+    patch:
+      operationId: partial_updateSemester
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this semester.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                period:
+                  enum:
+                  - 1
+                  - 2
+                year:
+                  type: integer
+                start:
+                  type: string
+                  format: date-time
+                finish:
+                  type: string
+                  format: date-time
+                state:
+                  enum:
+                  - finished
+                  - current
+                  - preparing
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  period:
+                    enum:
+                    - 1
+                    - 2
+                  year:
+                    type: integer
+                  start:
+                    type: string
+                    format: date-time
+                  finish:
+                    type: string
+                    format: date-time
+                  state:
+                    enum:
+                    - finished
+                    - current
+                    - preparing
+                required:
+                - period
+                - year
+                - start
+                - finish
+                - state
+          description: ''
+    delete:
+      operationId: destroySemester
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this semester.
         schema:
           type: string
       responses:
