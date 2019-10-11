@@ -9,6 +9,7 @@ class Evaluation(models.Model):
     title = models.CharField(max_length=100, blank=True, default='')
     date = models.DateTimeField()
     evaluation_type = models.IntegerField(choices=_EVAL_TYPES)
+    course = models.ForeignKey('Course', on_delete=models.CASCADE)
 
 
 class Semester(models.Model):
@@ -32,6 +33,8 @@ class Course(models.Model):
     section = models.IntegerField(blank=True, default=1)
     description = models.TextField()
     ramo = models.ForeignKey('Ramo', on_delete=models.CASCADE)
+    semester = models.ForeignKey('Semester', on_delete=models.CASCADE)
+    teacher = models.ForeignKey('Teacher', on_delete=models.SET_NULL, null=True)
 
 
 class Ramo(models.Model):
@@ -50,4 +53,3 @@ class Ramo(models.Model):
 
 class Teacher(models.Model):
     name = models.CharField(max_length=100, blank=False)
-
