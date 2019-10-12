@@ -1,4 +1,5 @@
 import React from "react";
+import { Container, Col, Row } from "react-bootstrap";
 
 class SelectSemester extends React.Component {
   render() {
@@ -15,29 +16,27 @@ class SelectSemester extends React.Component {
 };
 
 export default class NewSemester extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2>Crear semestre</h2>
-
-        <form>
-			<div>	
-				<div id="load-semester">
-					<h4>Cargar semestre</h4>
-          			<input type="file" name="xls-semester"/>
-		        </div>
-
-        		<div id="copy-semester">
-					<h4>Replicar semestre</h4>
-          			<SelectSemester/>
-		        </div>
-			</div>
-        	<div id="new-semester-buttons">
-          		<input id="preview-semester" type="button" value="Previsualizar"/>  
-	          	<input id="save-semester" type="submit" value="Guardar"/>
-    	    </div>
-        </form>
-      </div>
-    )
-  }
+	render() {
+		return (
+			<Container>
+				<Row>
+					<Col>
+						<h2>Crear Semestre</h2>
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						<h4>Cargar Semestre</h4>
+						<input type="file" name="xls-semester"/>
+					</Col>
+					<Col>
+						<h4>Replicar Semestre</h4>
+						<SelectSemester/>
+						<input id="preview-semester" type="button" value="Previsualizar"/>
+						<input id="save-semester" type="submit" value="Guardar"/>
+					</Col>
+				</Row>
+			</Container>
+		);
+	}
 }

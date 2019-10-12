@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import { NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 const LoggedOutView = props => {
   return (
@@ -61,8 +59,8 @@ class Header extends React.Component {
 			<Navbar.Brand href="#" className="mr-auto">uplanning</Navbar.Brand>
 			<Nav>
 				<NavDropdown title="Sergio Ochoa" id="navbar-dropdown">
-					<NavDropdown.Item href="#">Administrar</NavDropdown.Item>
-					<NavDropdown.Item href="#">Calendario</NavDropdown.Item>
+					<NavDropdown.Item href="/manage">Administrar</NavDropdown.Item>
+					<NavDropdown.Item href="/calendar">Calendario</NavDropdown.Item>
 				</NavDropdown>
 			</Nav>
 		</Navbar>
