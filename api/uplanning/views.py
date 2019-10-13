@@ -1,6 +1,8 @@
-from rest_framework import viewsets
-from uplanning.serializers import EvaluationSerializer, SemesterSerializer, CourseSerializer, RamoSerializer, TeacherSerializer
-from uplanning.models import Evaluation, Semester, Course, Ramo, Teacher
+from rest_framework import viewsets, views, mixins, status
+from rest_framework.parsers import FileUploadParser
+from rest_framework.response import Response
+from uplanning.serializers import EvaluationSerializer, SemesterSerializer, SemesterSpreadSheetSerializer, CourseSerializer, RamoSerializer, TeacherSerializer
+from uplanning.models import Evaluation, Semester, SemesterSpreadSheet, Course, Ramo, Teacher
 
 
 class EvaluationViewSet(viewsets.ModelViewSet):
@@ -26,3 +28,29 @@ class RamoViewSet(viewsets.ModelViewSet):
 class TeacherViewSet(viewsets.ModelViewSet):
     queryset = Teacher.objects.all()
     serializer_class = TeacherSerializer
+
+
+# views.py
+class FileUploadViewSet(
+                        mixins.CreateModelMixin,
+                        mixins.ListModelMixin,
+                        mixins.RetrieveModelMixin,
+                        viewsets.GenericViewSet):
+    queryset = SemesterSpreadSheet.objects.all()
+    serializer_class = SemesterSpreadSheetSerializer
+
+    def create(self, request):
+        print("HOLAAAAAAAAAAAAAAAAAAAAAA")
+        # Aca poner toda la logica de si se puede parsear la shiet
+        try:
+            print(request.data)
+            # Chantar toda la logica del parseo, crear weas en el semestre, etc
+
+            return super(FileUploadViewSet, self).create(request)
+        except Exception:
+            return Response(
+                {"speak to my makers": "they surely know what's wrong /s"},
+                status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+        # return super().create(request)
+        # return Response({"status": "yes gud"})

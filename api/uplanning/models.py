@@ -29,6 +29,16 @@ class Semester(models.Model):
     state = models.CharField(choices=_STATE_TYPES, max_length=100, blank=False)
 
 
+class SemesterSpreadSheet(models.Model):
+    semester = models.ForeignKey('Semester', on_delete=models.CASCADE)
+    file = models.FileField(upload_to='uploads/')
+
+    # def save(self, *args, **kwargs):
+    #     print("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+    #     print(type(self.file))
+    #     super(SemesterSpreadSheet, self).save(*args, **kwargs)
+
+
 class Course(models.Model):
     section = models.IntegerField(blank=True, default=1)
     description = models.TextField()

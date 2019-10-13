@@ -16,6 +16,12 @@ class SemesterSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
 
 
+class SemesterSpreadSheetSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.SemesterSpreadSheet
+        fields = "__all__"
+
+
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Course
