@@ -34,7 +34,6 @@ class Evaluation extends React.Component {
     const start = this.props.start;
     const end = this.props.end;
 
-    const route = window.location.pathname + "/" + name.replace(" ", "+");
     return (
 		<Row>
 			<Col>
@@ -51,13 +50,9 @@ class Evaluation extends React.Component {
 
 export default class AdminCourse extends React.Component {
   render() {
-    const year = this.props.match.params.year;
-    const semester = this.props.match.params.semester;
     const course = this.props.match.params.course;
     const section = this.props.match.params.section;
 
-    const route_semester = "/manage/" + year + "/" + semester;
-    const route_course = window.location.pathname;
     const route_new_eval = window.location.pathname + "/new_evaluation";
 
     const courses_dict = {"CC3001":"Algoritmos y Estructuras de Datos", 

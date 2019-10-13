@@ -1,7 +1,6 @@
 import React from "react";
-import NewSemester from "./NewSemester";
-import { Alert, Button, Container, Col, Row, Form, FormControl, InputGroup} from 'react-bootstrap';
-import Octicon, { Plus, Trashcan } from "@primer/octicons-react";
+import { Alert, Button, Container, Col, Row, Form, FormControl, InputGroup, Tooltip, OverlayTrigger} from 'react-bootstrap';
+import Octicon, { Gear, Trashcan, Unfold } from "@primer/octicons-react";
 import AutoBreadcrumb from "./Breadcrumb";
 
 export default class Manager extends React.Component {
@@ -45,7 +44,24 @@ export default class Manager extends React.Component {
   }
 }
 
+
+
 class SemesterItem extends React.Component {
+	constructor(props) {
+		super(props);
+		this.paths = {
+			manage: "/manage/" + this.props.year + "/" + this.props.semester,
+			// TODO: Hay que redirigir al path que muestra el calendario de este semestre
+			visualize: "/calendar",
+			delete: "#"
+		}
+		this.descriptions = {
+			manage: "Modificar semestre",
+			visualize: "Visualizar semestre",
+			delete: "Eliminar semestre"
+		};
+	}
+
 	getVariant() {
 		switch(this.props.state) {
 			case "Por comenzar":
@@ -68,7 +84,22 @@ class SemesterItem extends React.Component {
 						{this.props.state} 
 					</Col>
 					<Col xs="auto">
-						<Octicon icon={Trashcan} size="medium"/>
+						<SemesterButton 
+							href={this.paths.visualize}
+							icon={Unfold}
+							description={this.descriptions.visualize}
+						/>
+						<SemesterButton
+							href={this.paths.manage}
+							icon={Gear}
+							description={this.descriptions.manage}
+						/>
+						<SemesterButton
+							href={this.paths.delete}
+							icon={Trashcan}
+							description={this.descriptions.delete}
+							last={true}
+						/>
 					</Col>
 				</Row>
 			</Alert>
@@ -76,3 +107,22 @@ class SemesterItem extends React.Component {
 	}
 }
 
+class SemesterButton extends React.Component {
+	renderTooltip() {
+		return <Tooltip>{this.props.description}</Tooltip>;
+	}
+
+	render() {
+		const marginRight = (this.props.last ? "mr-0" : "mr-2");
+		return (
+			<OverlayTrigger
+				placement="top"
+				overlay={this.renderTooltip()}
+			>
+				<Button href={this.props.href} variant="outline-secondary" className={marginRight}>
+					<Octicon icon={this.props.icon} size="medium"/>
+				</Button>
+			</OverlayTrigger>
+		);
+	}
+}
