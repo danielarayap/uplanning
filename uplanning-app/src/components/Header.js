@@ -11,6 +11,7 @@ class Header extends React.Component {
 					<NavDropdown title="Sergio Ochoa" id="navbar-dropdown">
 						<NavDropdown.Item href="/manage">Administrar</NavDropdown.Item>
 						<NavDropdown.Item href="/calendar">Calendario</NavDropdown.Item>
+						<NavDropdown.Item href="#">Cerrar Sesión</NavDropdown.Item>
 					</NavDropdown>
 				</Nav>
 			</Navbar>
