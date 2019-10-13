@@ -1,39 +1,69 @@
 import React from "react";
 import List from  "./List"
 import NewSemester from "./NewSemester";
-import { Alert, Container, Col, Row } from 'react-bootstrap';
+import { Alert, Button, Container, Col, Row, Form, FormControl, InputGroup} from 'react-bootstrap';
 
 export default class Manager extends React.Component {
-  render() {
-    return (
-    	<Container>
-			<Row>
-				<h1>Todos los semestres</h1>
-			</Row>
-			<SemesterItem/>
-			<SemesterItem/>
-			<SemesterItem/>
-		</Container>
+	render() {
+    	return (
+    		<Container>
+				<Row>
+					<Col><h3>Todos los semestres</h3></Col>
+				</Row>
+				<Row className="mb-3">
+					<Col>
+						<Form inline className="mr-auto">
+							<InputGroup>
+								<FormControl
+									type="text"
+									placeholder="Buscar Semestre"
+									className="mr-sm-2"
+								/>
+								<Button type="submit">Buscar</Button>
+							</InputGroup>
+						</Form>
+					</Col>
+					<Col xs="auto">
+						<Button href="/manage/new_semester" className="btn btn-primary">Nuevo Semestre</Button>
+					</Col>
+				</Row>
+				<SemesterItem year="2020" semester="1" state="Por comenzar"/>
+				<SemesterItem year="2019" semester="2" state="En curso"/>
+				<SemesterItem year="2019" semester="1" state="Finalizado"/>
+				<SemesterItem year="2018" semester="2" state="Finalizado"/>
+			</Container>
     );
   }
 }
 
 class SemesterItem extends React.Component {
+	getVariant() {
+		switch(this.props.state) {
+			case "Por comenzar":
+				return "warning";
+			case "Finalizado":
+				return "secondary";
+			default:
+				return "success";
+		}
+	}
+
 	render() {
 		return (
-			<Alert variant="primary">
-			<Row variant="primary">
-				<Col>
-						2020-1
-				</Col>
-				<Col>
-						Por Comenzar
-				</Col>
-				<Col>
+			<Alert variant={this.getVariant()}>
+				<Row>
+					<Col xs="auto">
+						{this.props.year}-{this.props.semester}
+					</Col>
+					<Col>
+						{this.props.state} 
+					</Col>
+					<Col xs="auto">
 						Opciones
-				</Col>
-		</Row>
-</Alert>
+					</Col>
+				</Row>
+			</Alert>
 		);
 	}
 }
+

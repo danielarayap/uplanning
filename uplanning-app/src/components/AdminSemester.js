@@ -35,7 +35,7 @@ export default class AdminCourses extends React.Component {
         <a href="/manage">Semestres</a> -> <a href={route_semester}>{year}-{semester}</a>
 		
 		<Row>
-				<Col><h4>Cursos {year}-{semester}</h4></Col>
+				<Col><h3>Cursos {year}-{semester}</h3></Col>
 		</Row>
 		<Row className="mb-3">
 			<Col>
@@ -51,7 +51,7 @@ export default class AdminCourses extends React.Component {
 				</Form>
 			</Col>
 			<Col md="auto">
-				<Button>Nuevo Semestre</Button>
+				<Button>Nuevo Curso</Button>
 			</Col>
 		</Row>
         <Course name="Algoritmos y Estructuras de Datos" section="1" code="CC3001"/>

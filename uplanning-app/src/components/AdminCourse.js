@@ -1,4 +1,6 @@
 import React from "react";
+import { Alert, Button, Container, Form, Row, Col } from "react-bootstrap";
+
 
 class DifferentDayEvaluation extends React.Component {
   render() {
@@ -34,13 +36,15 @@ class Evaluation extends React.Component {
 
     const route = window.location.pathname + "/" + name.replace(" ", "+");
     return (
-      <a class="clickable-div" href={route}>
-        <div class="admin-course">
-          {name}
-          <SameDateEvaluation start={start} end={end} />
-          <DifferentDayEvaluation start={start} end={end} />
-        </div>
-      </a>
+		<Row>
+			<Col>
+				<Alert variant="primary">
+					{name}
+          			<SameDateEvaluation start={start} end={end} />
+					<DifferentDayEvaluation start={start} end={end} />
+				</Alert>
+			</Col>
+	  	</Row>
     )
   }
 }
@@ -61,9 +65,8 @@ export default class AdminCourse extends React.Component {
                           "CC3003":"Bases de Datos",
                           "CC7001":"Electivo"}
     return (
-      <div>
-        <a href="/manage">Semestres</a> -> <a href={route_semester}>{year}-{semester}</a> -> <a href={route_course}>{course}-{section}</a>
-        <div id="course-info">
+		<Container>
+		<div id="course-info">
           <h4>{courses_dict[course]}</h4>
           <p>Sección {section}
           <br/>
@@ -74,8 +77,6 @@ export default class AdminCourse extends React.Component {
           Miércoles 10:15 - 12:00 <br/>
           Viernes 10:15 - 12:00
           </p>
-        </div>
-
         <div id="course-desc">
           Descripción de carga para auxiliar/ayudante 
           <br/>
@@ -85,9 +86,9 @@ export default class AdminCourse extends React.Component {
         <br/>
 
         <h5>Evaluaciones</h5>
-        <form action={route_new_eval}>
-          <input type="submit" value="Nueva Evaluación"/>
-        </form>
+        <Form action={route_new_eval}>
+			<Button type="submit"> Nueva Evaluación</Button>
+		</Form>
 
         <div id="course-evals">
           <h6>Controles</h6>
@@ -99,8 +100,10 @@ export default class AdminCourse extends React.Component {
           <div id="course-tareas">
             <Evaluation name="Tarea 1" start="2019-08-20 00:00" end="2019-09-20 23:59"/>
           </div>
-        </div>
-      </div>
+  </div>
+</div>
+		</Container>
+
     );
   }
 }

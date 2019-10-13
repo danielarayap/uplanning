@@ -56,7 +56,7 @@ class Header extends React.Component {
 //        </div>
 //      </nav>
 		<Navbar bg="primary" variant="dark">
-			<Navbar.Brand href="#" className="mr-auto">uplanning</Navbar.Brand>
+			<Navbar.Brand href="/" className="mr-auto">uplanning</Navbar.Brand>
 			<Nav>
 				<NavDropdown title="Sergio Ochoa" id="navbar-dropdown">
 					<NavDropdown.Item href="/manage">Administrar</NavDropdown.Item>
