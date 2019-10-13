@@ -76,7 +76,7 @@ class SemesterItem extends React.Component {
 	render() {
 		return (
 			<Alert variant={this.getVariant()}>
-				<Row style={{height: "100%"}} className="align-middle">
+				<Row>
 					<Col xs="auto">
 						{this.props.year}-{this.props.semester}
 					</Col>
