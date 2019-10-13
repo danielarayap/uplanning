@@ -1,7 +1,8 @@
 import React from "react";
-import { Alert, Button, Container, Col, Row, Form, FormControl, InputGroup, Tooltip, OverlayTrigger} from 'react-bootstrap';
-import Octicon, { Gear, Trashcan, Unfold } from "@primer/octicons-react";
+import { Alert, Button, Container, Col, Row, Form, FormControl, InputGroup } from 'react-bootstrap';
+import { Gear, Trashcan, Unfold } from "@primer/octicons-react";
 import AutoBreadcrumb from "./Breadcrumb";
+import OptionButton from "./OptionButton";
 
 export default class Manager extends React.Component {
 	constructor(props) {
@@ -51,8 +52,7 @@ class SemesterItem extends React.Component {
 		super(props);
 		this.paths = {
 			manage: "/manage/" + this.props.year + "/" + this.props.semester,
-			// TODO: Hay que redirigir al path que muestra el calendario de este semestre
-			visualize: "/calendar",
+			visualize: "/manage/" + this.props.year + "/" + this.props.semester + "/view",
 			delete: "#"
 		}
 		this.descriptions = {
@@ -84,17 +84,17 @@ class SemesterItem extends React.Component {
 						{this.props.state} 
 					</Col>
 					<Col xs="auto">
-						<SemesterButton 
+						<OptionButton 
 							href={this.paths.visualize}
 							icon={Unfold}
 							description={this.descriptions.visualize}
 						/>
-						<SemesterButton
+						<OptionButton
 							href={this.paths.manage}
 							icon={Gear}
 							description={this.descriptions.manage}
 						/>
-						<SemesterButton
+						<OptionButton
 							href={this.paths.delete}
 							icon={Trashcan}
 							description={this.descriptions.delete}
@@ -107,22 +107,3 @@ class SemesterItem extends React.Component {
 	}
 }
 
-class SemesterButton extends React.Component {
-	renderTooltip() {
-		return <Tooltip>{this.props.description}</Tooltip>;
-	}
-
-	render() {
-		const marginRight = (this.props.last ? "mr-0" : "mr-2");
-		return (
-			<OverlayTrigger
-				placement="top"
-				overlay={this.renderTooltip()}
-			>
-				<Button href={this.props.href} variant="outline-secondary" className={marginRight}>
-					<Octicon icon={this.props.icon} size="medium"/>
-				</Button>
-			</OverlayTrigger>
-		);
-	}
-}

@@ -12,6 +12,36 @@
 
 /* ========================== Calendar.js ============================ */
 
+#calendar-wrapper {
+	height: 600px;
+}
+
+.example {
+  font-size: 14px;
+  padding: 0 40px;
+  min-height: calc(100vh - 100px);
+  min-height: max-content;
+  height: calc(100vh - 100px);
+  width: 100%;
+  margin: auto;
+
+  &,
+  & > * {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rbc-calendar {
+    flex: 1;
+    min-height: 580px;
+  }
+}
+
+.examples {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
 /* ========================== NewSemester.js ========================= */
 
