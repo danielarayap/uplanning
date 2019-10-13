@@ -12,8 +12,8 @@ export default class ManageEvaluation extends React.Component {
   				semester: this.props.match.params.semester,
 			  	course: this.props.match.params.course.toUpperCase(),
 			  	section: this.props.match.params.section,
-			  	name: this.props.match.params.evaluacionName,
-			  	type: this.props.match.params.evaluationType
+			  	name: this.props.match.params.name,
+			  	type: this.props.match.params.type
 		};
 
 		this.pathNames = [
@@ -39,16 +39,9 @@ export default class ManageEvaluation extends React.Component {
 				<Container>
 					<h4>Editar Evaluacion</h4>
       			  	<h5>{this.info.course}</h5>
-      		  	  	<h5>{this.info.section}</h5>
-	  
+      		  	  	<h5>Seccion {this.info.section}</h5>
+      		  	  	<h5>{this.info.name.replace('-', " ").replace(/^\w/, c => c.toUpperCase())}</h5>
 					<form action="/" method="get">
-      		  			Tipo: <br/>
-				      	<select>
-        					<option value="control">Control</option>
-		    				<option value="examen">Examen</option>
-        					<option value="tarea">Tarea</option>
-		      			</select>
-      		  			<br/><br/>
 		     	 		Fecha: <br/>
 		     	 		<input type="date"/>
 		     	 		<br/><br/>
