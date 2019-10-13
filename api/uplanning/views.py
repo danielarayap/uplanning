@@ -40,17 +40,21 @@ class FileUploadViewSet(
     serializer_class = SemesterSpreadSheetSerializer
 
     def create(self, request):
-        print("HOLAAAAAAAAAAAAAAAAAAAAAA")
+        print("\nHOLAAAAAAAAAAAAAAAAAAAAAA")
         # Aca poner toda la logica de si se puede parsear la shiet
         try:
-            print(request.data)
+            file = request.data.get("file")
+            print(file)
+            print(file.size)
+            print(file.content_type)
             # Chantar toda la logica del parseo, crear weas en el semestre, etc
 
             return super(FileUploadViewSet, self).create(request)
-        except Exception:
-            return Response(
-                {"speak to my makers": "they surely know what's wrong /s"},
-                status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+        except Exception as e:
+            raise e
+            # return Response(
+            #     {"speak to my makers": "they surely know what's wrong /s"},
+            #     status.HTTP_500_INTERNAL_SERVER_ERROR
+            # )
         # return super().create(request)
         # return Response({"status": "yes gud"})
