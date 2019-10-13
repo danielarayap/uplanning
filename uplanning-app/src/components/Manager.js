@@ -1,12 +1,19 @@
 import React from "react";
-import List from  "./List"
 import NewSemester from "./NewSemester";
 import { Alert, Button, Container, Col, Row, Form, FormControl, InputGroup} from 'react-bootstrap';
 import Octicon, { Plus, Trashcan } from "@primer/octicons-react";
+import AutoBreadcrumb from "./Breadcrumb";
 
 export default class Manager extends React.Component {
+	constructor(props) {
+		super(props);
+		this.pathNames = ['Administrar'];
+	}
+
 	render() {
-    	return (
+		return (
+			<main>
+			<AutoBreadcrumb names={this.pathNames}/>
     		<Container>
 				<Row>
 					<Col><h3>Todos los semestres</h3></Col>
@@ -33,6 +40,7 @@ export default class Manager extends React.Component {
 				<SemesterItem year="2019" semester="1" state="Finalizado"/>
 				<SemesterItem year="2018" semester="2" state="Finalizado"/>
 			</Container>
+			</main>
     );
   }
 }

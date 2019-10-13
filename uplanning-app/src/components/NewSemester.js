@@ -1,5 +1,6 @@
 import React from "react";
 import { Alert, Button, Container, Col, Row, InputGroup } from "react-bootstrap";
+import AutoBreadcrumb from "./Breadcrumb";
 
 class SelectSemester extends React.Component {
 	render() {
@@ -36,8 +37,15 @@ class SelectFile extends React.Component {
 
 
 export default class NewSemester extends React.Component {
+	constructor(props) {
+		super(props);
+		this.pathNames = ['Administrar', 'Nuevo Semestre'];
+	}
+
 	render() {
 		return (
+			<main>
+			<AutoBreadcrumb names={this.pathNames}/>
 			<Container>
 				<Row className="mb-4">
 					<Col>
@@ -67,6 +75,7 @@ export default class NewSemester extends React.Component {
 					</Col>
 				</Row>
 			</Container>
+			</main>
 		);
 	}
 }

@@ -44,7 +44,7 @@ class Header extends React.Component {
 		render() {
 				const handleSelect = eventKey => alert(`selected ${eventKey}`);
     return (
-		<Navbar bg="primary" variant="dark" className="mb-5">
+		<Navbar bg="primary" variant="dark" className="mb-3">
 			<Navbar.Brand href="/" className="mr-auto">uplanning</Navbar.Brand>
 			<Nav>
 				<NavDropdown title="Sergio Ochoa" id="navbar-dropdown">
