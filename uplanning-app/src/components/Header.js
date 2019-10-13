@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 const LoggedOutView = props => {
   return (
@@ -40,20 +41,19 @@ const LoggedOutView = props => {
 };
 
 class Header extends React.Component {
-  render() {
+		render() {
+				const handleSelect = eventKey => alert(`selected ${eventKey}`);
     return (
-      <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: "#e3f2fd"}}>
-        <div className="container">
-
-          <div className="navbar-brand">
-            uplanning
-          </div>
-
-          <LoggedOutView  />
-
-        </div>
-      </nav>
-    );
+		<Navbar bg="primary" variant="dark" className="mb-3">
+			<Navbar.Brand href="/" className="mr-auto">uplanning</Navbar.Brand>
+			<Nav>
+				<NavDropdown title="Sergio Ochoa" id="navbar-dropdown">
+					<NavDropdown.Item href="/manage">Administrar</NavDropdown.Item>
+					<NavDropdown.Item href="/calendar">Calendario</NavDropdown.Item>
+				</NavDropdown>
+			</Nav>
+		</Navbar>
+	);
   }
 }
 
