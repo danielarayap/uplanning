@@ -44,18 +44,7 @@ class Header extends React.Component {
 		render() {
 				const handleSelect = eventKey => alert(`selected ${eventKey}`);
     return (
-//       <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: "#e3f2fd"}}>
-//         <div className="container">
-//
-//          <div className="navbar-brand">
-//            uplanning
-//          </div>
-//
-//          <LoggedOutView  />
-//
-//        </div>
-//      </nav>
-		<Navbar bg="primary" variant="dark">
+		<Navbar bg="primary" variant="dark" className="mb-5">
 			<Navbar.Brand href="/" className="mr-auto">uplanning</Navbar.Brand>
 			<Nav>
 				<NavDropdown title="Sergio Ochoa" id="navbar-dropdown">

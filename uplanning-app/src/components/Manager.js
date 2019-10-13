@@ -2,6 +2,7 @@ import React from "react";
 import List from  "./List"
 import NewSemester from "./NewSemester";
 import { Alert, Button, Container, Col, Row, Form, FormControl, InputGroup} from 'react-bootstrap';
+import Octicon, { Plus, Trashcan } from "@primer/octicons-react";
 
 export default class Manager extends React.Component {
 	render() {
@@ -24,7 +25,7 @@ export default class Manager extends React.Component {
 						</Form>
 					</Col>
 					<Col xs="auto">
-						<Button href="/manage/new_semester" className="btn btn-primary">Nuevo Semestre</Button>
+							<Button href="/manage/new_semester" className="btn btn-primary">Nuevo Semestre</Button>
 					</Col>
 				</Row>
 				<SemesterItem year="2020" semester="1" state="Por comenzar"/>
@@ -55,11 +56,11 @@ class SemesterItem extends React.Component {
 					<Col xs="auto">
 						{this.props.year}-{this.props.semester}
 					</Col>
-					<Col>
+					<Col className="text-center">
 						{this.props.state} 
 					</Col>
 					<Col xs="auto">
-						Opciones
+						<Octicon icon={Trashcan} size="medium"/>
 					</Col>
 				</Row>
 			</Alert>
