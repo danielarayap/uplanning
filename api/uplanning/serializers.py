@@ -3,13 +3,6 @@ from rest_framework import serializers
 from uplanning import models
 
 
-class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = models.Evaluation
-        # fields = ['id', 'title', 'date', 'evaluation_type', 'url',]
-        fields = '__all__'
-
-
 class SemesterSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Semester
@@ -19,12 +12,6 @@ class SemesterSerializer(serializers.HyperlinkedModelSerializer):
 class SemesterSpreadSheetSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.SemesterSpreadSheet
-        fields = "__all__"
-
-
-class CourseSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = models.Course
         fields = "__all__"
 
 
@@ -38,3 +25,21 @@ class TeacherSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Teacher
         fields = "__all__"
+
+
+class CourseSerializer(serializers.HyperlinkedModelSerializer):
+    semester = SemesterSerializer(read_only=True)
+    teacher = TeacherSerializer(read_only=True)
+    ramo = RamoSerializer(read_only=True)
+
+    class Meta:
+        model = models.Course
+        fields = "__all__"
+
+
+class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
+    course = CourseSerializer(read_only=True)
+
+    class Meta:
+        model = models.Evaluation
+        fields = '__all__'

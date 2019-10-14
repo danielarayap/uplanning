@@ -24,8 +24,8 @@ class Semester(models.Model):
     )
     period = models.IntegerField(choices=_PERIOD_TYPES)
     year = models.IntegerField()
-    start = models.DateTimeField()
-    finish = models.DateTimeField()
+    start = models.DateField()
+    finish = models.DateField()
     state = models.CharField(choices=_STATE_TYPES, max_length=100, blank=False)
 
 
@@ -45,6 +45,7 @@ class Course(models.Model):
     ramo = models.ForeignKey('Ramo', on_delete=models.CASCADE)
     semester = models.ForeignKey('Semester', on_delete=models.CASCADE)
     teacher = models.ForeignKey('Teacher', on_delete=models.SET_NULL, null=True)
+    #horario = models.TextField()
 
 
 class Ramo(models.Model):
