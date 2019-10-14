@@ -8,7 +8,10 @@ router.register(r'semesters', views.SemesterViewSet)
 router.register(r'courses', views.CourseViewSet)
 router.register(r'ramos', views.RamoViewSet)
 router.register(r'teachers', views.TeacherViewSet)
+router.register(r'upload', views.FileUploadViewSet)
+# router.register(r'upload', views.FileUploadView)
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    # path(r'^upload/(?P<filename>[^/]+)$', views.FileUploadView.as_view())
 ]

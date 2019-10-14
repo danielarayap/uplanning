@@ -1,3 +1,6 @@
+# la carpeta donde se suben los archivos
+uploads/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
