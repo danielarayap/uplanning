@@ -4,6 +4,10 @@ from rest_framework.response import Response
 from uplanning.serializers import EvaluationSerializer, SemesterSerializer, SemesterSpreadSheetSerializer, CourseSerializer, RamoSerializer, TeacherSerializer
 from uplanning.models import Evaluation, Semester, SemesterSpreadSheet, Course, Ramo, Teacher
 
+import ipdb
+import csv
+import io
+
 
 class EvaluationViewSet(viewsets.ModelViewSet):
     queryset = Evaluation.objects.all()
@@ -43,11 +47,20 @@ class FileUploadViewSet(
         print("\nHOLAAAAAAAAAAAAAAAAAAAAAA")
         # Aca poner toda la logica de si se puede parsear la shiet
         try:
-            file = request.data.get("file")
-            print(file)
-            print(file.size)
-            print(file.content_type)
+            file = request.data.get("file").read()
+
+            print(file[:100])
+            print(len(file))
+            print(type(file))
             # Chantar toda la logica del parseo, crear weas en el semestre, etc
+            sstream = io.StringIO(file.decode())
+
+            reader = csv.reader(sstream)
+            # ipdb.set_trace()
+            for i, row in enumerate(reader):
+                if i > 10:
+                    break
+                print(', '.join(row))
 
             return super(FileUploadViewSet, self).create(request)
         except Exception as e:
