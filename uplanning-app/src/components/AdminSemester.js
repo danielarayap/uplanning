@@ -1,28 +1,60 @@
 import React from "react";
 import { Alert, Button, Container, Col, Row, Form, InputGroup, FormControl } from "react-bootstrap";
+import { Gear, Trashcan, Unfold } from "@primer/octicons-react";
 import AutoBreadcrumb from "./Breadcrumb";
-import "../index.css";
+import OptionButton from "./OptionButton";
 
 class Course extends React.Component {
+	constructor(props) {
+		super(props);
+		this.path = window.location.pathname;
+		this.info = {
+			name: this.props.name,
+			section: this.props.section,
+			code: this.props.code
+		};
+		this.paths = {
+			manage: this.path + "/" + this.info.code + "/" + this.info.section,
+			visualize: this.path + "/" + this.info.code + "/" + this.info.section + "/view",
+			delete: "#"
+		};
+
+		this.descriptions = {
+			manage: "Modificar curso",
+			visualize: "Visualizar curso",
+			delete: "Eliminar curso"
+		};
+	}
+
 	render() {
-		const name = this.props.name;
-		const section = this.props.section;
-		const code = this.props.code;
-		const route = `${window.location.pathname}/${code}/${section}`;
-		return (					
-			<Row>
-				<Col>
-					<a className="clickable-course" href={route}>
-						<Alert variant="primary" href="#">	
-							<div>
-	        	  				{name}, Sección {section}
-	          					<br/>
-	          					{code}
-		        			</div>
-	    	  			</Alert>
-    	  			</a>
-				</Col>
-			</Row>		
+		return (
+			<Alert variant="primary" href="#">
+				<Row>
+					<Col>						
+    	  				{this.info.name}, Sección {this.info.section}
+      					<br/>
+      					{this.info.code}
+					</Col>
+					<Col xs="auto">
+						<OptionButton 
+							href={this.paths.visualize}
+							icon={Unfold}
+							description={this.descriptions.visualize}
+						/>
+						<OptionButton
+							href={this.paths.manage}
+							icon={Gear}
+							description={this.descriptions.manage}
+						/>
+						<OptionButton
+							href={this.paths.delete}
+							icon={Trashcan}
+							description={this.descriptions.delete}
+							last={true}
+						/>
+					</Col>
+				</Row>
+			</Alert>
 	    );
   	}
 };
@@ -30,13 +62,14 @@ class Course extends React.Component {
 export default class AdminSemester extends React.Component {	
 	constructor(props) {
 		super(props);
+		this.path = window.location.pathname;
 		this.info = {
 			year: this.props.match.params.year,
 			semester: this.props.match.params.semester
-		}
+		};
 		this.pathNames = ["Administrar", this.info.year + "-" + this.info.semester];
 		this.paths = ["manage", this.info.year + "/" + this.info.semester];
-		this.state = {"courses":[]};
+		this.state = {"courses":[]}
 	}
 
 	componentDidMount() {
@@ -48,7 +81,8 @@ export default class AdminSemester extends React.Component {
 			error => console.log(error));
 	}
 	
-	render() {		
+	render() {
+		// Sort courses by code
 		this.state.courses.sort((a,b) => a.ramo.code.localeCompare(b.ramo.code));
 		return (
 			<main>
@@ -71,10 +105,10 @@ export default class AdminSemester extends React.Component {
 						</Form>
 					</Col>
 					<Col md="auto">
-						<Button>Nuevo Curso</Button>
+						<Button href={this.path + "/new_course"}>Nuevo Curso</Button>
 					</Col>
 				</Row>
-				{this.state.courses.map(item => (
+    		 	{this.state.courses.map(item => (
 					<Course name={item.ramo.name} section={item.section} code={item.ramo.code} />
 				))}
 			</Container>
