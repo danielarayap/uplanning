@@ -20,17 +20,73 @@ class SelectSemester extends React.Component {
 
 
 class SelectFile extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			label: "Escoger Archivo",
+		}
+		this.handleChange = this.handleChange.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.fileInput = React.createRef();
+	}
+
+	handleChange(event) {
+		// console.log(JSON.stringify(event.target.files));
+		this.setState({label: event.target.files[0].name})
+	}
+
+	async handleSubmit(event) {
+		event.preventDefault();
+		let file = this.fileInput.current.files[0]
+		console.log("HOLA!!!", file)
+		const text = await file.text()
+		console.log(text.slice(0, 20))
+		try {
+			const response = await fetch(
+				"http://localhost:8000/upload/",
+				{
+					method: "POST",
+					headers: {
+      			'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({text: text}),
+				}
+			)
+			const responseJson = await response.json()
+			console.log(responseJson)
+			alert("Exito! Semestre creado tranquilein john wayne")
+		} catch (e) {
+			alert("Ups, algo salio mal, contactate con mis creadores")
+			console.log(e);
+		}
+		// alert(
+		// 	`Selected file - ${
+		// 		file.name
+		// 	}`
+		// );
+	}
+
 	render() {
 		return (
-			<InputGroup>
-				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="upload-semester-input"/>
-					<label class="custom-file-label" for="upload-semester-input"> Escoger Archivo</label>
-				</div>
-				<InputGroup.Append>
-					<Button variant="outline-secondary bg-light">Subir</Button>
-				</InputGroup.Append>
-			</InputGroup>
+			<form onSubmit={this.handleSubmit}>
+				<InputGroup>
+					<div class="custom-file">
+						<input 
+							type="file"
+							ref={this.fileInput}
+							onChange={ this.handleChange }
+							class="custom-file-input"
+							id="upload-semester-input"
+						/>
+						<label class="custom-file-label" for="upload-semester-input">
+							{this.state.label}
+						</label>
+					</div>
+					<InputGroup.Append>
+						<Button type="submit" variant="outline-secondary bg-light">Subir</Button>
+					</InputGroup.Append>
+				</InputGroup>
+			</form>
 		);
 	}
 }

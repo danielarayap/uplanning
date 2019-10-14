@@ -50,13 +50,13 @@ class FileUploadViewSet(
         print("\nHOLAAAAAAAAAAAAAAAAAAAAAA")
         # Aca poner toda la logica de si se puede parsear la shiet
         try:
-            file = request.data.get("file").read()
+            file = request.data.get("text")
 
             # print(file[:100])
             # print(len(file))
             # print(type(file))
             # Chantar toda la logica del parseo, crear weas en el semestre, etc
-            file = io.StringIO(file.decode())
+            file = io.StringIO(file)
             parsed = parse_spreadsheet(file)
 
             semester = Semester(**{key: val for key, val in parsed.items() if key != "courses"})
