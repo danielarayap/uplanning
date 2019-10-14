@@ -89,6 +89,7 @@ class SemesterItem extends React.Component {
 
 	render() {
 		return (
+			<a style={{textDecoration:'none'}} href={this.paths.visualize}>
 			<Alert variant={this.getVariant()}>
 				<Row>
 					<Col xs="auto">
@@ -117,6 +118,7 @@ class SemesterItem extends React.Component {
 					</Col>
 				</Row>
 			</Alert>
+			</a>
 		);
 	}
 }

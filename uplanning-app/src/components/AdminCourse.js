@@ -23,7 +23,8 @@ class SameDateEvaluation extends React.Component {
     const end = this.props.end.split(" ");
 
     if (start[0] === end[0]) {
-      return <p>{start[0]}, {start[1]} - {end[1]}</p>;
+      //return <p>{start[0]}, {start[1]} - {end[1]}</p>;
+      return start[0];
     } else {
       return null;
     }
@@ -55,10 +56,12 @@ class Evaluation extends React.Component {
 
 	render() {
 		return (
+            <a style={{textDecoration:'none'}} href={this.paths.manage}>
 			<Alert variant="primary">
 				<Row>
 					<Col>
 						{this.info.name}
+                        <br/>
        					<SameDateEvaluation start={this.info.start} end={this.info.end} />
 						<DifferentDayEvaluation start={this.info.start} end={this.info.end} />
 					</Col>
@@ -76,6 +79,7 @@ class Evaluation extends React.Component {
 					</Col>
 			  	</Row>
 			</Alert>
+            </a>
 		)
   	}
 }
@@ -135,7 +139,7 @@ export default class AdminCourse extends React.Component {
 	render() {
         const name = this.state.course[0] ? this.state.course[0].ramo.name : "";
         const teacher = this.state.course[0] ? this.state.course[0].teacher.name : "";
-        const desc = this.state.course[0] ? this.state.course[0].description : "";
+        const desc = this.state.course[0] ? this.state.course[0].aux_description : "";
     	return (
 			<main>	
 			<AutoBreadcrumb names={this.pathNames} paths={this.paths}/>
@@ -154,7 +158,7 @@ export default class AdminCourse extends React.Component {
 		        <div id="course-desc">
         			Descripción de carga para auxiliar/ayudante 
 		            <br/>
-          			<input id="desc" type="text" value={desc}/>
+          			<textarea name="desc" value={desc} cols="100" rows="7" style={{resize:'none'}}/>
 		        </div>
         		<br/>
 
@@ -164,13 +168,13 @@ export default class AdminCourse extends React.Component {
         			<h6>Controles</h6>
 	     	    	<div id="course-controles">
             			{this.state.evaluations.map(item => (
-                          item.evaluation_type === 1 ? <Evaluation name={item.title} start={item.date} end={item.date}/> : null
+                          item.evaluation_type === 1 ? <Evaluation type="control" name={item.title} start={item.date} end={item.date}/> : null
                         ))}
           			</div>
           			<h6>Tareas</h6>
           			<div id="course-tareas">
             			{this.state.evaluations.map(item => (
-                          item.evaluation_type === 2 ? <Evaluation name={item.title} start={item.date} end={item.date}/> : null
+                          item.evaluation_type === 2 ? <Evaluation type="tarea" name={item.title} start={item.date} end={item.date}/> : null
                         ))}
   		        	</div>
 				</div>
