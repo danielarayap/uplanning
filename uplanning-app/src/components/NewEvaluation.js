@@ -46,14 +46,8 @@ export default class NewEvaluation extends React.Component {
       		  			<input name="name" type="text"/> 
       		  			<br/>     		  			
 
-		     	 		Inicio: <br/>
-		     	 		<input name="start-date" type="date"/>
-		     	 		<input name="start-time" type="time"/>
-
-		     	 		<br/>
-		     	 		Fin: <br/>
-		     	 		<input name="finish-date" type="date"/>
-		     	 		<input name="finish-time" type="time"/>
+		     	 		Fecha: <br/>
+		     	 		<input name="date" type="date"/>
 
 		    			<br/><br/>
 						<input type="submit" value="Guardar"/>

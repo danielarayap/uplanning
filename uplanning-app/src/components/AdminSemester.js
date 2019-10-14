@@ -28,6 +28,7 @@ class Course extends React.Component {
 
 	render() {
 		return (
+			<a style={{textDecoration:'none'}} href={this.paths.visualize}>
 			<Alert variant="primary" href="#">
 				<Row>
 					<Col>						
@@ -55,6 +56,7 @@ class Course extends React.Component {
 					</Col>
 				</Row>
 			</Alert>
+			</a>
 	    );
   	}
 };
