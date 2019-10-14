@@ -7,8 +7,22 @@
 /* ========================== Login.js =============================== */
 
 
-/* ========================== Manage.js ============================== */
+/* ========================== Manager.js ============================== */
 
+.clickable-semester-unfinished, .clickable-semester-unfinished:hover {
+    text-decoration: none !important;
+    color: #856404;
+}
+
+.clickable-semester-open, .clickable-semester-open:hover {
+    text-decoration: none !important;
+    color: #155724;
+}
+
+.clickable-semester-closed, .clickable-semester-closed:hover {
+    text-decoration: none !important;
+    color: #383d41;
+}
 
 /* ========================== Calendar.js ============================ */
 
@@ -21,6 +35,11 @@
 
 /* ========================== AdminSemester.js ======================= */
 
+.clickable-course, .clickable-course:hover {
+    text-decoration: none !important;
+    color: #004085;
+}
+
 
 /* ========================== AdminCourse.js ========================= */
 
@@ -29,7 +48,6 @@
 
 
 /* ========================== NewEvaluation.js ======================= */
-
 
 
 

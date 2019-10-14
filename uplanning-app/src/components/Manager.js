@@ -7,9 +7,18 @@ export default class Manager extends React.Component {
 	constructor(props) {
 		super(props);
 		this.pathNames = ['Administrar'];
+		this.state = {"semesters":[]};
+	}
+
+	componentDidMount() {
+		fetch('http://localhost:8000/semesters').then(res => res.json()).then(
+			result => this.setState({"semesters":result.results}),
+			error => console.log(error));
 	}
 
 	render() {
+		// Sort semesters by year, then by period (descending)
+		this.state.semesters.sort((a,b) => a.year !== b.year ? b.year - a.year : b.period - a.period);
 		return (
 			<main>
 			<AutoBreadcrumb names={this.pathNames}/>
@@ -31,26 +40,31 @@ export default class Manager extends React.Component {
 						</Form>
 					</Col>
 					<Col xs="auto">
-							<Button href="/manage/new_semester" className="btn btn-primary">Nuevo Semestre</Button>
+						<Button href="/manage/new_semester" className="btn btn-primary">Nuevo Semestre</Button>
 					</Col>
 				</Row>
-				<SemesterItem year="2020" semester="1" state="Por comenzar"/>
-				<SemesterItem year="2019" semester="2" state="En curso"/>
-				<SemesterItem year="2019" semester="1" state="Finalizado"/>
-				<SemesterItem year="2018" semester="2" state="Finalizado"/>
+				{this.state.semesters.map(item => (
+					<SemesterItem year={item.year} semester={item.period} state={state_dict[item.state]} />
+				))}
 			</Container>
 			</main>
     );
   }
 }
 
+const state_dict = {"finished":"Finalizado",
+					"preparing":"Por comenzar",
+					"current":"En curso"};
 
+const state_class_dict = {"Por comenzar":"clickable-semester-unfinished",
+						  "En curso":"clickable-semester-open",
+						  "Finalizado":"clickable-semester-closed"};
 
 class SemesterItem extends React.Component {
 	constructor(props) {
 		super(props);
 		this.paths = {
-			manage: "/manage/" + this.props.year + "/" + this.props.semester,
+			manage: `/manage/${this.props.year}/${this.props.semester}`,
 			// TODO: Hay que redirigir al path que muestra el calendario de este semestre
 			visualize: "/calendar",
 			delete: "#"
@@ -75,6 +89,7 @@ class SemesterItem extends React.Component {
 
 	render() {
 		return (
+			<a class={state_class_dict[this.props.state]} href={this.paths.visualize}>
 			<Alert variant={this.getVariant()}>
 				<Row>
 					<Col xs="auto">
@@ -103,6 +118,7 @@ class SemesterItem extends React.Component {
 					</Col>
 				</Row>
 			</Alert>
+			</a>
 		);
 	}
 }

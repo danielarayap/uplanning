@@ -1,27 +1,33 @@
 import React from "react";
-import "./css/main.css";
 import { Alert, Button, Container, Col, Row, Form, InputGroup, FormControl } from "react-bootstrap";
 import AutoBreadcrumb from "./Breadcrumb";
+import "../index.css";
 
 class Course extends React.Component {
 	render() {
-		return (
+		const name = this.props.name;
+		const section = this.props.section;
+		const code = this.props.code;
+		const route = `${window.location.pathname}/${code}/${section}`;
+		return (					
 			<Row>
 				<Col>
-					<Alert variant="primary" href="#">
-						<div>
-        	  				{this.props.name}, Sección {this.props.section}
-          					<br/>
-          					{this.props.code}
-	        			</div>
-    	  			</Alert>
+					<a className="clickable-course" href={route}>
+						<Alert variant="primary" href="#">	
+							<div>
+	        	  				{name}, Sección {section}
+	          					<br/>
+	          					{code}
+		        			</div>
+	    	  			</Alert>
+    	  			</a>
 				</Col>
-			</Row>
+			</Row>		
 	    );
   	}
 };
 
-export default class AdminCourses extends React.Component {	
+export default class AdminSemester extends React.Component {	
 	constructor(props) {
 		super(props);
 		this.info = {
@@ -30,9 +36,20 @@ export default class AdminCourses extends React.Component {
 		}
 		this.pathNames = ["Administrar", this.info.year + "-" + this.info.semester];
 		this.paths = ["manage", this.info.year + "/" + this.info.semester];
+		this.state = {"courses":[]};
+	}
+
+	componentDidMount() {
+		fetch('http://localhost:8000/courses').then(res => res.json()).then(
+			result => this.setState({
+				"courses":result.results.filter(
+					item => item.semester.year === parseInt(this.info.year)
+							&& item.semester.period === parseInt(this.info.semester))}),
+			error => console.log(error));
 	}
 	
-	render() {
+	render() {		
+		this.state.courses.sort((a,b) => a.ramo.code.localeCompare(b.ramo.code));
 		return (
 			<main>
 			<AutoBreadcrumb names = {this.pathNames} paths={this.paths}/>
@@ -57,11 +74,9 @@ export default class AdminCourses extends React.Component {
 						<Button>Nuevo Curso</Button>
 					</Col>
 				</Row>
-    		    <Course name="Algoritmos y Estructuras de Datos" section="1" code="CC3001"/>
-       			 <Course name="Algoritmos y Estructuras de Datos" section="2" code="CC3001"/>
-    			<Course name="Matemáticas Discretas para la Computación" section="1" code="CC3002"/>
-	   	 		<Course name="Bases de Datos" section="1" code="CC3003"/>
-				<Course name="Electivo" section="1" code="CC7001"/>
+				{this.state.courses.map(item => (
+					<Course name={item.ramo.name} section={item.section} code={item.ramo.code} />
+				))}
 			</Container>
 			</main>
 		);
