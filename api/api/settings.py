@@ -25,7 +25,7 @@ SECRET_KEY = 'ru@uk9=u3@!m7)ou9fkom0w^@yq4mu!-f*ycyx9r%*5xl5vwq&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 REST_FRAMEWORK = {
@@ -44,16 +44,27 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # INFO: esto es para usar el framework rest
     'uplanning.apps.UplanningConfig',  # INFO: agregar al proyecto la app uplanning
+    'corsheaders', #INFO: para conectar react con django
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
+CORS_ORIGIN_REGEX_WHITELIST = [
+    'http://localhost:3000',
 ]
 
 ROOT_URLCONF = 'api.urls'

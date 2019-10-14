@@ -62,7 +62,7 @@ class Sidebar extends React.Component {
       &nbsp;<input type="checkbox" onClick={() => this.myFunction("CC3001")}/>&nbsp;CC3001 - Algoritmos y Estructuras de Datos &nbsp;<br/>
       &nbsp;<input type="checkbox" onClick={() => this.myFunction("CC3101")}/>&nbsp;CC3101 - Matemáticas Discretas para la Computación &nbsp;<br/>
       &nbsp;<input type="checkbox" onClick={() => this.myFunction("CC3002")}/>&nbsp;CC3002 - Metodologías de Diseño y Programación &nbsp;<br/>
-      &nbsp;<button onClick={() => this.showSelected()}>Actualizar</button>&nbsp;
+      &nbsp;<button>Guardar</button>&nbsp;
       </div>
     );
   }
@@ -70,12 +70,16 @@ class Sidebar extends React.Component {
 
 export default class Calendar extends React.Component {
   showSelected(){
-    if(toShowQuery.length > 0){
-      const elements = document.querySelectorAll(toShowQuery);
-      [...elements].forEach(element => {
-        element.parentElement.style.display = "";
-      })
-    }    
+    window.requestAnimationFrame(
+      function() {
+        if(toShowQuery.length > 0){
+          const elements = document.querySelectorAll(toShowQuery);
+          [...elements].forEach(element => {
+            element.parentElement.style.display = "";
+          })
+        }
+      }
+    )
   }
   constructor(props) {
     super(props);
@@ -83,9 +87,9 @@ export default class Calendar extends React.Component {
   }
   render() {
     return (
-	  <main>
-	  <AutoBreadcrumb names={this.pathNames}/>
-	  <div id="calendar-wrapper">
+    <main>
+    <AutoBreadcrumb names={this.pathNames}/>
+    <div id="calendar-wrapper">
       <Sidebar/>
       <div style={{height: 500}}>
       <BigCalendar
@@ -93,7 +97,7 @@ export default class Calendar extends React.Component {
         events={exampleEvents}
         startAccessor="start"
         endAccessor="end"
-        //onRangeChange = {() => this.showSelected()}
+        onRangeChange = {() => this.showSelected()}
         eventPropGetter={
           (event, start, end, isSelected) => {
             let newStyle = {
@@ -107,7 +111,7 @@ export default class Calendar extends React.Component {
       />
       </div>
       </div>
-	  </main>
+    </main>
     );
   }
 }

@@ -32,24 +32,25 @@ export default class NewEvaluation extends React.Component {
 				<AutoBreadcrumb names={this.pathNames} paths={this.paths}/>
 				<Container>
 					<h4>Crear Evaluación</h4>
-      			  	<h5>{this.info.course}</h5>
-      		  	  	<h5>{this.info.section}</h5>
+      			  	<h5>{this.info.course}-{this.info.section}</h5>
 	  
-					<form action="/" method="get">
+					<form action="http://localhost:8000/evaluations/" method="post">
       		  			Tipo: <br/>
-				      	<select>
+				      	<select name="type">
         					<option value="control">Control</option>
-		    				<option value="examen">Examen</option>
         					<option value="tarea">Tarea</option>
 		      			</select>
-      		  			<br/><br/>
+      		  			<br/>
+
+      		  			Título: <br/>
+      		  			<input name="name" type="text"/> 
+      		  			<br/>     		  			
+
 		     	 		Fecha: <br/>
-		     	 		<input type="date"/>
-		     	 		<br/><br/>
-				     	Hora: <br/>
-				     	<input type="time"/> a <input type="time"/>
+		     	 		<input name="date" type="date"/>
+
 		    			<br/><br/>
-						<button type="submit">Guardar</button>
+						<input type="submit" value="Guardar"/>
 					</form>
 			</Container>
 	</main>

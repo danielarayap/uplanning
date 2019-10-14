@@ -28,6 +28,7 @@ class Course extends React.Component {
 
 	render() {
 		return (
+			<a style={{textDecoration:'none'}} href={this.paths.visualize}>
 			<Alert variant="primary" href="#">
 				<Row>
 					<Col>						
@@ -55,11 +56,12 @@ class Course extends React.Component {
 					</Col>
 				</Row>
 			</Alert>
+			</a>
 	    );
   	}
 };
 
-export default class AdminCourses extends React.Component {	
+export default class AdminSemester extends React.Component {	
 	constructor(props) {
 		super(props);
 		this.path = window.location.pathname;
@@ -69,9 +71,21 @@ export default class AdminCourses extends React.Component {
 		};
 		this.pathNames = ["Administrar", this.info.year + "-" + this.info.semester];
 		this.paths = ["manage", this.info.year + "/" + this.info.semester];
+		this.state = {"courses":[]}
+	}
+
+	componentDidMount() {
+		fetch('http://localhost:8000/courses').then(res => res.json()).then(
+			result => this.setState({
+				"courses":result.results.filter(
+					item => item.semester.year === parseInt(this.info.year)
+							&& item.semester.period === parseInt(this.info.semester))}),
+			error => console.log(error));
 	}
 	
 	render() {
+		// Sort courses by code
+		this.state.courses.sort((a,b) => a.ramo.code.localeCompare(b.ramo.code));
 		return (
 			<main>
 			<AutoBreadcrumb names = {this.pathNames} paths={this.paths}/>
@@ -96,11 +110,9 @@ export default class AdminCourses extends React.Component {
 						<Button href={this.path + "/new_course"}>Nuevo Curso</Button>
 					</Col>
 				</Row>
-    		    <Course name="Algoritmos y Estructuras de Datos" section="1" code="CC3001"/>
-       			<Course name="Algoritmos y Estructuras de Datos" section="2" code="CC3001"/>
-    			<Course name="Matemáticas Discretas para la Computación" section="1" code="CC3002"/>
-	   	 		<Course name="Bases de Datos" section="1" code="CC3003"/>
-				<Course name="Electivo" section="1" code="CC7001"/>
+    		 	{this.state.courses.map(item => (
+					<Course name={item.ramo.name} section={item.section} code={item.ramo.code} />
+				))}
 			</Container>
 			</main>
 		);

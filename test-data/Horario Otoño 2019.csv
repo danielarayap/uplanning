@@ -1,0 +1,56 @@
+OFERTA DE CURSOS SEMESTRE OTOÑO 2019,,,,,,,,
+CODIGO,EQUIVAVALENCIA,Créditos,CUPO,NOMBRE CURSO,RUT,PROFESOR,HORARIO CATEDRA,HORARIO AUXILIAR
+CC3001-01,CC30A,6,100,Algoritmos y Estructuras de Datos,6517553-3,Patricio Poblete,2.2  4.2,5.4
+CC3001-02,CC30A,6,100,Algoritmos y Estructuras de Datos,6941197-5,Nelson Baloian,1.4  3.4,5.4
+CC3002,S/Eq,6,70,Metodologías de Diseño y Programación,23228142-1,Alexandre Bergel,1.3  3.4 ,5.3
+CC3101,CC40C,6,100,Matemáticas Discretas para la Computación,13473300-4,Pablo Barcelo,2.3  4.3,3.5
+CC3102,CC30B,6,60,Teoría de la Computación,13545110-K,Jorge Pérez Rojas,2.3  4.3,3.5
+CC3201,CC42A,6,70,Bases de Datos,24482054-9,Aidan Hogan,1.2  3.2,5.2
+CC3301,CC31A,6,60,Programación de Software de Sistemas,9449189-4,Luis Mateu,2.2  4.2,5.4
+CC3501,S/Eq,6,70,Modelación y Computación Gráfica para  Ingenieros,16609246-9,Daniel Calderón,2.1  4.1,5.3
+CC4101,CC41A,6,60,Lenguajes de Programación,14744633-0,Eric Tanter,2.2  4.2,5.4
+CC4102,CC40A,6,60,Diseño y Análisis de Algoritmos,14610732-K  13473300-4,Gonzalo Navarro /                         Pablo Barcelo,2.4  4.4,1.5
+CC4301,CC41C,6,60,Arquitectura de Computadores,15321904-4,Luis Mateu,1.2  5.2,3.2
+CC4302,CC41B,6,40,Sistemas Operativos,9449189-4,Luis Mateu,2.3  4.3,3.5
+CC4303,CC51C / EL4107,6,40,Redes,17586757-0,Catalina Alvarez Inostroza,2.2  4.2,5.4
+CC4310,,6,30,Taller de Ingeniería de Sistemas Confiables,13103768-6,Javier Bustos,1.3  1.4,
+CC4401,CC31B,6,60,Ingeniería de Software,10976043-9,Jocelyn Simmonds,2.5  4.5,3.6
+CC4901,CC49A,7,S/R,Práctica Profesional I,23228142-1,Alexandre Bergel,,
+CC5002,CC51T,6,30,Desarrollo de Aplicaciones Web,13568801-0,José Urzua,2.1  4.1,1.3
+CC5113,,6,20,Aprendizaje Automático Bayesiano,15321904-4,Pablo Guerrero,1.4  3.4,5.4
+CC5206,CC71Q / CC7210,6,30,Introducción a la Minería de Datos,9587752-4                  15639963-9,Bárbara Poblete /           Felipe Bravo Marquez,1.3  5.3,
+CC5208,CC74E,6,30,Visualización de Información,13271569-6,Benjamín Bustos,3.1  5.1,1.1
+CC5212,,6,70,Procesamiento Masivo de Datos,24482054-9,Aidan Hogan,1.4  3.4,5.3
+CC5301,CC51Q,6,30,Introducción a la Criptografía Moderna,8455175-9,Alejandro Hevia,1.2  3.2,5.2
+CC5304,CC61S,6,15,Arquitectura de Sistemas de Alta Disponibilidad,10268781-7,César Guerrero,2.6,
+CC5401,CC51A,6,40,Ingeniería de Software II,14650629-1,Sergio Ochoa,2.2  4.2,5.4
+CC5402,CC61A,12,30,Proyecto de Softwate,14555388-1,Cecilia Bastarrica ,2.6  4.6,
+CC5404,CC61J,6,25,Taller de UML,13252311-8,Andrés Muñoz,3.6  3.7,
+CC5501,CC50E / CC72Y,6,30,Mallas Geométricas y Aplicaciones,5816459-3,María Cecilia Rivara,1.3  3.4,
+CC5502,CC60Q,6,30,Geometría Computacional,8108326-6,Nancy Histchfeld,1.2  3.2,
+CC5504,CC52E,6,18,Interfaces Humano-Computador,6965357-K,Jaime Sánchez,1.3  3.4,5.3
+CC5509,,6,20,Reconocimiento de Patrones,15260934-5,Mauricio Cerda,2.6  2.7  4.6  4.7,
+CC5510,,6,30,Diseño de Sistemas Interactivos,16657649-0,Francisco Gutierrez F.      ,1.2  3.2,5.2
+CC5511,,6,20,Fundamentos e Ingeniería de Interacciones Humano-Computador.,6941197-5 5306829-4,Nelson Baloian   30%  /              José A. Pino  70%,2.4  4.4,
+CC5601,CC60R,6,30,Preparación y ]Evaluación de Proyectos TI                                                      Curso Núcleo Gestión para Ingenieros ,8124557-6,Pablo González,2.3  4.3,
+CC5604,,6,20,Aplicaciones Empresariales sobre la Plataforma Java (J2EE).,14459076-7,Andrés Farías,1.6  3.6,5.3
+CC5609,,3,20,Taller de Desarrollo Comercial                                        Curso Formación Integral de la Especialidad,9125236-8,Adolfo Carrasco,1.6,
+CC5611,,3,20,Etica para Ingenieros en Computación                                        Curso Formación Integral de la Especialidad,13103768-6,Javier Bustos,3.2,
+CC5613,,3,30, Taller de Comunicación Efectiva: Caso Práctico de Lanzamiento de Producto.                                        Curso Formación Integral de la Especialidad,9675336-5,Eduardo Godoy,1.6,2.6
+CC5614,,3,20,Herramientas para el Trabajo en Equipo             Curso Formación Integral de la Especialidad,12777235-5,Andrea Rodriguez,4.5,
+CC5617,,6,30,Taller de Exploración de Oportunidades para Innovar Aplicando TI.                                        Curso Formación Integral de la Especialidad,10803421-1,Paulina Concha Rojas,3.4  3.5,
+CC5901,CC59A,7,S/R,Práctica Profesional II,23228142-1,Alexandre Bergel,,
+CC6204,,6,40,Deep Learning,22462385-2     13670911-9,José Manuel Saavedra /       Juan Manuel Barrios{,2.5  4.5,
+CC6401,CC62V,6,21,Taller de Metodologías Agiles de Desarrollo de Software.,8687797-K,Agustín Villena,5.2  5.3,
+CC6908-01,CC69E,3,40,Introducción al Trabajo de Título,24482054-9,Aidan Hogan,3.6,
+,,,,,,,,
+CC6909-01,CC69F,21,4,Trabajo de Título,10976043-9,Jocelyn Simmonds,3.6,
+CC6909-02,CC69F,21,4,Trabajo de Título,13271569-6,Nancy Hitschfeld,3.6,
+CC6909-03,CC69F,21,4,Trabajo de Título,14650629-1  16657649-0,Sergio Ochoa /                        Francisco Gutiérrez,3.6,
+CC6909-04,CC69F,21,4,Trabajo de Título,24482054-9  13545110-K,Aidan Hogan /                        Jorge Pérez,3.6,
+CC6909-05,CC69F,21,2,Trabajo de Título,13670911-9,Juan Manuel Barrios,3.6,
+CC6909-06,CC69F,21,2,Trabajo de Título,8455175-9,Alejandro Hevia,3.6,
+CC6909-07,CC69F,21,2,Trabajo de Título,5306829-4,José A. Pino,3.6,
+CC6909-08,CC69F,21,3,Trabajo de Título,22462385-2,José Manuel Saavedra,3.6,
+CC6909-09,CC69F,21,2,Trabajo de Título,6965357-K,Jaime Sánchez,3.6,
+CC6909-10,CC69F,21,2,Trabajo de Título,6409116-6,Sandra de la Fuente,3.6,
