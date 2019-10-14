@@ -7,7 +7,8 @@ class Evaluation(models.Model):
         (2, "Tarea"),
     )
     title = models.CharField(max_length=100, blank=True, default='')
-    date = models.DateTimeField()
+    start = models.DateTimeField()
+    finish = models.DateTimeField()
     evaluation_type = models.IntegerField(choices=_EVAL_TYPES)
     course = models.ForeignKey('Course', on_delete=models.CASCADE)
 
@@ -24,14 +25,15 @@ class Semester(models.Model):
     )
     period = models.IntegerField(choices=_PERIOD_TYPES)
     year = models.IntegerField()
-    start = models.DateTimeField()
-    finish = models.DateTimeField()
+    start = models.DateField()
+    finish = models.DateField()
     state = models.CharField(choices=_STATE_TYPES, max_length=100, blank=False)
 
 
 class Course(models.Model):
     section = models.IntegerField(blank=True, default=1)
     description = models.TextField()
+    schedule = models.TextField()
     ramo = models.ForeignKey('Ramo', on_delete=models.CASCADE)
     semester = models.ForeignKey('Semester', on_delete=models.CASCADE)
     teacher = models.ForeignKey('Teacher', on_delete=models.SET_NULL, null=True)
