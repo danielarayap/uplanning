@@ -140,7 +140,6 @@ export default class AdminCourse extends React.Component {
         const name = this.state.course[0] ? this.state.course[0].ramo.name : "";
         const teacher = this.state.course[0] ? this.state.course[0].teacher.name : "";
         const desc = this.state.course[0] ? this.state.course[0].aux_description : "";
-        console.log(this.state.course[0]);
     	return (
 			<main>	
 			<AutoBreadcrumb names={this.pathNames} paths={this.paths}/>
