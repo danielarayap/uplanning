@@ -7,8 +7,9 @@ class Evaluation(models.Model):
         (2, "Tarea"),
     )
     title = models.CharField(max_length=100, blank=True, default='')
-    date = models.DateTimeField()
+    date = models.DateField()
     evaluation_type = models.IntegerField(choices=_EVAL_TYPES)
+    description = models.TextField(null=True, blank=True)
     course = models.ForeignKey('Course', on_delete=models.CASCADE)
 
 
@@ -18,19 +19,21 @@ class Semester(models.Model):
         (2, "Primavera"),
     )
     _STATE_TYPES = (
-        ("finished", "Terminado"),
-        ("current", "En ejecucion"),
-        ("preparing", "Por comenzar"),
+        (1, "Terminado"),
+        (2, "En ejecucion"),
+        (3, "Por comenzar"),
     )
-    period = models.IntegerField(choices=_PERIOD_TYPES)
     year = models.IntegerField()
+    period = models.IntegerField(choices=_PERIOD_TYPES)
     start = models.DateField()
     finish = models.DateField()
-    state = models.CharField(choices=_STATE_TYPES, max_length=100, blank=False)
+    state = models.CharField(choices=_STATE_TYPES, max_length=100, blank=False, default=3)
+
+    def __str__(self):
+        return "Semestre {}-{}".format(self.year, self.period)
 
 
 class SemesterSpreadSheet(models.Model):
-    semester = models.ForeignKey('Semester', on_delete=models.CASCADE)
     file = models.FileField(upload_to='uploads/')
 
     # def save(self, *args, **kwargs):
@@ -41,7 +44,7 @@ class SemesterSpreadSheet(models.Model):
 
 class Course(models.Model):
     section = models.IntegerField(blank=True, default=1)
-    description = models.TextField()
+    aux_description = models.TextField()
     ramo = models.ForeignKey('Ramo', on_delete=models.CASCADE)
     semester = models.ForeignKey('Semester', on_delete=models.CASCADE)
     teacher = models.ForeignKey('Teacher', on_delete=models.SET_NULL, null=True)
@@ -59,8 +62,11 @@ class Ramo(models.Model):
     )
     code = models.CharField(max_length=100, blank=False)
     name = models.CharField(max_length=100, blank=False)
-    semester = models.IntegerField(choices=_SEMESTERS)
+    nsemester = models.IntegerField(choices=_SEMESTERS)
 
 
 class Teacher(models.Model):
     name = models.CharField(max_length=100, blank=False)
+
+    def __str__(self):
+        return self.name

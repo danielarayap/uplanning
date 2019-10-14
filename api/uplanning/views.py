@@ -1,8 +1,11 @@
+import pprint
 from rest_framework import viewsets, views, mixins, status
 from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 from uplanning.serializers import EvaluationSerializer, SemesterSerializer, SemesterSpreadSheetSerializer, CourseSerializer, RamoSerializer, TeacherSerializer
 from uplanning.models import Evaluation, Semester, SemesterSpreadSheet, Course, Ramo, Teacher
+
+from uplanning.parser import parse_spreadsheet
 
 import ipdb
 import csv
@@ -49,19 +52,42 @@ class FileUploadViewSet(
         try:
             file = request.data.get("file").read()
 
-            print(file[:100])
-            print(len(file))
-            print(type(file))
+            # print(file[:100])
+            # print(len(file))
+            # print(type(file))
             # Chantar toda la logica del parseo, crear weas en el semestre, etc
-            sstream = io.StringIO(file.decode())
+            file = io.StringIO(file.decode())
+            parsed = parse_spreadsheet(file)
 
-            reader = csv.reader(sstream)
-            # ipdb.set_trace()
-            for i, row in enumerate(reader):
-                if i > 10:
-                    break
-                print(', '.join(row))
+            semester = Semester(**{key: val for key, val in parsed.items() if key != "courses"})
+            semester.save()
+            god_save_the_queen = [semester]
+            for c in parsed["courses"]:
+                ramo_keys = ("code", "name", "nsemester")
+                ramo, _ = Ramo.objects.get_or_create(
+                    **{key: val for key, val in c.items() if key in ramo_keys}
+                )
+                teacher, _ = Teacher.objects.get_or_create(name=c["teacher"])
+                # ipdb.set_trace()
+                course = Course(
+                    section=c["section"],
+                    aux_description=c["aux_description"],
+                    ramo=ramo,
+                    semester=semester,
+                    teacher=teacher,
+                )
+                # god_save_the_queen.append(course)
+                course.save()
 
+                for eval_ in c["evals"]:
+                    evaluation = Evaluation(**eval_, course=course)
+                    evaluation.save()
+                    # god_save_the_queen.append(evaluation)
+
+            # for save_yourself in god_save_the_queen:
+            #     save_yourself.save()
+            print(semester)
+            # pprint.pprint(parsed)
             return super(FileUploadViewSet, self).create(request)
         except Exception as e:
             raise e
