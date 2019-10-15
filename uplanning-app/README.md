@@ -1,5 +1,21 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## COMO CORRER
+No pesquen los otros comentarios, son autogenerados por la herramienta que estamos usando
+y probablemente nunca lo tengan que usar.
+
+Corre todos los comandos en la carpeta del front -> uplanning-app
+
+
+1. Primero instala tus paquetes, corre lo siguiente
+  ```bash
+  yarn
+  ```
+2. Ahora ya puedes correr el proyecto
+  ```bash
+  yarn start
+  ```
+
 ## Available Scripts
 
 In the project directory, you can run:
