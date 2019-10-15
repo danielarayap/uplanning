@@ -31,14 +31,14 @@ class NewCourse extends React.Component {
 					<h5>{this.info.year}-{this.info.semester}</h5>
 					<form action="http://localhost:8000/courses/" method="post">
 						Semestre: <br/>
-				      	<select id="semester" name="semester">
+				      	<select name="semester" name="semester">
         					<option value="1">Otoño</option>
         					<option value="2">Primavera</option>
 		      			</select>
 		      			<br/><br/>
 
 						Ramo: <br/>
-		            	<select id="ramo">
+		            	<select name="ramo">
 			            	<option value = "1">CC1001 - Introduccion a la Programacion</option>
 		            		<option value = "2">CC5206 - Introduccion a la Mineria de Datos</option>
 		            		<option value = "3">CC5401 - Ingenieria de Software II</option>
@@ -47,11 +47,11 @@ class NewCourse extends React.Component {
 		            	<br/><br/>
 
 						Seccion: <br/>
-						<input id="section" type="number" min="1"/>
+						<input name="section" type="number" min="1"/>
 						<br/><br/>
 
 						Profesor: <br/>
-		            	<select id="teacher">
+		            	<select name="teacher">
 			            	<option value = "1">Nelson Baloian T.</option>
 		            		<option value = "2">Aidan Hogan</option>
 		            		<option value = "3">Nancy Hitschfeld</option>
@@ -59,7 +59,7 @@ class NewCourse extends React.Component {
 						<br/><br/>
 
 						Descripcion: <br/>
-						<textarea id="description" rows="5" cols="50"/>
+						<textarea name="description" rows="5" cols="50"/>
 						<br/><br/>
 						<input type="submit" value="Guardar"/>
 						<br/><br/>
