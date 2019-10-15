@@ -59,7 +59,7 @@ class NewCourse extends React.Component {
 						<br/><br/>
 
 						Descripcion: <br/>
-						<textarea name="description" rows="5" cols="50"/>
+						<textarea name="aux_description" rows="5" cols="50"/>
 						<br/><br/>
 						<input type="submit" value="Guardar"/>
 						<br/><br/>
