@@ -34,7 +34,8 @@ class Semester(models.Model):
 
 
 class SemesterSpreadSheet(models.Model):
-    file = models.FileField(upload_to='uploads/')
+    # file = models.FileField(upload_to='uploads/')
+    text = models.TextField()
 
     # def save(self, *args, **kwargs):
     #     print("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
