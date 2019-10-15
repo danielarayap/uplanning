@@ -27,16 +27,43 @@ class NewCourse extends React.Component {
 			<main>
 				<AutoBreadcrumb names={this.pathNames} paths={this.paths}/>
 				<Container>
-					<Row>
-						<Col>
-							<h3>Crear Curso</h3>
-						</Col>
-					</Row>
-					<Row>
-						<Col>
-							TODO
-						</Col>
-					</Row>
+					<h4>Crear Curso</h4>
+					<h5>{this.info.year}-{this.info.semester}</h5>
+					<form action="http://localhost:8000/courses/" method="post">
+						Semestre: <br/>
+				      	<select name="semester" name="semester">
+        					<option value="1">Otoño</option>
+        					<option value="2">Primavera</option>
+		      			</select>
+		      			<br/><br/>
+
+						Ramo: <br/>
+		            	<select name="ramo">
+			            	<option value = "1">CC1001 - Introduccion a la Programacion</option>
+		            		<option value = "2">CC5206 - Introduccion a la Mineria de Datos</option>
+		            		<option value = "3">CC5401 - Ingenieria de Software II</option>
+		            		<option value = "4">CC6204 - Deep Learning</option>
+		            	</select>
+		            	<br/><br/>
+
+						Seccion: <br/>
+						<input name="section" type="number" min="1"/>
+						<br/><br/>
+
+						Profesor: <br/>
+		            	<select name="teacher">
+			            	<option value = "1">Nelson Baloian T.</option>
+		            		<option value = "2">Aidan Hogan</option>
+		            		<option value = "3">Nancy Hitschfeld</option>
+		            	</select>
+						<br/><br/>
+
+						Descripcion: <br/>
+						<textarea name="aux_description" rows="5" cols="50"/>
+						<br/><br/>
+						<input type="submit" value="Guardar"/>
+						<br/><br/>
+					</form>
 				</Container>
 			</main>
 		);
@@ -44,3 +71,4 @@ class NewCourse extends React.Component {
 }
 
 export default NewCourse;
+
