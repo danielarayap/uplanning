@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # INFO: esto es para usar el framework rest
     'uplanning.apps.UplanningConfig',  # INFO: agregar al proyecto la app uplanning
-    'corsheaders', #INFO: para conectar react con django
+    'corsheaders',  # INFO: para conectar react con django
+    'django_extensions',  # INFO: extensiones utiles
 ]
 
 MIDDLEWARE = [
