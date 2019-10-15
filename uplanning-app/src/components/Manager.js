@@ -13,7 +13,7 @@ export default class Manager extends React.Component {
 
 	componentDidMount() {
 		fetch('http://localhost:8000/semesters').then(res => res.json()).then(
-			result => this.setState({"semesters":result.results}),
+			result => this.setState({"semesters":result}),
 			error => console.log(error));
 	}
 

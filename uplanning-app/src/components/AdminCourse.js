@@ -114,7 +114,7 @@ export default class AdminCourse extends React.Component {
         .then(res => res.json())
         .then(
           result => this.setState({
-            "course":result.results.filter(
+            "course":result.filter(
               item => item.semester.year === parseInt(this.info.year)
                       && item.semester.period === parseInt(this.info.semester)
                       && item.ramo.code === this.info.code
@@ -127,7 +127,7 @@ export default class AdminCourse extends React.Component {
           .then(
             result => this.setState({
             "course": this.state.course,
-            "evaluations": result.results.filter(
+            "evaluations": result.filter(
                 item => item.course.semester.year === parseInt(this.info.year)
                         && item.course.semester.period === parseInt(this.info.semester)
                         && item.course.ramo.code === this.info.code

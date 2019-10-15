@@ -31,7 +31,7 @@ class SidebarElement extends React.Component {
           .then(res => res.json())
           .then(
             result => this.setState({
-              "evaluations": result.results.filter(
+              "evaluations": result.filter(
                   item => item.course.semester.year === parseInt(this.info.year)
                           && item.course.semester.period === parseInt(this.info.semester)
                           && item.course.ramo.code === this.info.code
@@ -87,7 +87,7 @@ class Sidebar extends React.Component {
   componentDidMount() {
     fetch('http://localhost:8000/courses').then(res => res.json()).then(
       result => this.setState({
-        "courses":result.results.filter(
+        "courses":result.filter(
           item => item.semester.year === this.info.year
                   && item.semester.period === this.info.semester)}),
       error => console.log(error));
@@ -108,8 +108,6 @@ class Sidebar extends React.Component {
             section={item.section}
             name={item.ramo.name}/>
         ))}
-
-        <button>Guardar</button>
       </div>
     );
   }
@@ -146,7 +144,7 @@ export default class Calendar extends React.Component {
   componentDidMount() {
     fetch('http://localhost:8000/evaluations').then(res => res.json()).then(
       result => this.setState({
-        "evaluations": this.createEvents(result.results.filter(
+        "evaluations": this.createEvents(result.filter(
                 item => item.course.semester.year === this.info.year
                         && item.course.semester.period === this.info.semester))}),
       error => console.log(error));
