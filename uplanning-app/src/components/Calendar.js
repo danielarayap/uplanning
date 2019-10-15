@@ -5,113 +5,170 @@ import AutoBreadcrumb from "./Breadcrumb";
 import exampleEvents from "./exampleEvents";
 import "react-big-calendar/lib/css/react-big-calendar.css"
 
-// import "./styles.scss";
-
 const localizer = momentLocalizer(moment);
-var toShowList = [];
-var toShowQuery = "";
+var calendar = null;
+var calendar_class = null;
 
-class Sidebar extends React.Component {
-  hideAll(){
-    const elements = document.querySelectorAll(".rbc-event-content");
-    [...elements].forEach(element => {
-      element.parentElement.style.display = "none";
-    })
+class SidebarElement extends React.Component {
+  constructor(props) {
+    super(props);
+    this.info = {
+      year: this.props.year,
+      semester: this.props.semester,
+      code: this.props.code,
+      name: this.props.name,
+      section: this.props.section
+    };
+    this.state = {"evaluations":[]};
+    this.calendar_evals = [];
+    this.checked = true;
   }
-  toggleCourse(curso){
-    if(toShowList.some(e => e === curso)){
-      for(var i = 0; i < toShowList.length; i++){
-        if(toShowList[i] === curso) {
-           toShowList.splice(i, 1);
-        }
+
+
+
+  componentDidMount() {
+    fetch('http://localhost:8000/evaluations')
+          .then(res => res.json())
+          .then(
+            result => this.setState({
+              "evaluations": result.results.filter(
+                  item => item.course.semester.year === parseInt(this.info.year)
+                          && item.course.semester.period === parseInt(this.info.semester)
+                          && item.course.ramo.code === this.info.code
+                          && item.course.section === parseInt(this.info.section))}),
+            error => console.log(error));
+  }
+
+  handleCheck() {
+    this.checked = !this.checked;
+    const evaluations = this.state.evaluations.filter(
+      item => item.course.ramo.code === this.info.code
+              && item.course.section === this.info.section
+              && item.course.semester.year === this.info.year
+              && item.course.semester.period === this.info.semester);
+
+    function belongsToThisCourse(evaluation, self) {
+      const f = self.state.evaluations.filter(item => item.url === evaluation.url);
+      return f.length !== 0;
+    }
+
+    if (evaluations.length > 0) {
+      if (this.checked) {
+        this.calendar_evals.map(item => calendar.props.events.push(item));
+        this.calendar_evals = [];
+      } else {
+        calendar.props.events.map(item => belongsToThisCourse(item, this) ? this.calendar_evals.push(item) : null);
+        this.calendar_evals.map(item => calendar.props.events.splice(calendar.props.events.indexOf(item), 1));
       }
     }
-    else{
-      toShowList.push(curso);
-    }    
+    calendar_class.forceUpdate();
   }
-  newQuery(){
-    toShowQuery = "";
-    for(let i = 0; i < toShowList.length; i++){
-      toShowQuery += '[title*="';
-      toShowQuery += toShowList[i];
-      toShowQuery += '"], ';
-    }
-    toShowQuery = toShowQuery.substring(0, toShowQuery.length - 2);    
-  }
-  showSelected(){
-    if(toShowQuery.length > 0){
-      const elements = document.querySelectorAll(toShowQuery);
-      [...elements].forEach(element => {
-        element.parentElement.style.display = "";
-      })
-    }    
-  }
-  myFunction(curso){
-    this.hideAll();
-    this.toggleCourse(curso);
-    this.newQuery();
-    this.showSelected();
-  }
+
   render() {
     return (
+      <div>
+        <input type="checkbox" onChange={e => this.handleCheck()} checked={this.checked}/>
+        {this.info.code}-{this.info.section} {this.info.name}
+      </div>
+    );
+  }
+}
+
+class Sidebar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.info = {
+      year: 2019,
+      semester: 2
+    };
+    this.state = {"courses":[]};
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:8000/courses').then(res => res.json()).then(
+      result => this.setState({
+        "courses":result.results.filter(
+          item => item.semester.year === this.info.year
+                  && item.semester.period === this.info.semester)}),
+      error => console.log(error));
+  }
+
+  render() {
+    // Sort courses by code
+    this.state.courses.sort((a,b) => a.ramo.code.localeCompare(b.ramo.code));
+    return (
       <div style={{width: "10%"}, {float: "left"}}>
-      <h3>&nbsp;Seleccionar Cursos</h3>
-      &nbsp;<input type="checkbox" onClick={() => this.myFunction("CC1000")}/>&nbsp;CC1000 - Herramientas Computacionales para Ingeniería y Ciencias &nbsp;<br/>
-      &nbsp;<input type="checkbox" onClick={() => this.myFunction("CC1002")}/>&nbsp;CC1002 - Introducción a la Programación &nbsp;<br/>
-      &nbsp;<input type="checkbox" onClick={() => this.myFunction("CC3001")}/>&nbsp;CC3001 - Algoritmos y Estructuras de Datos &nbsp;<br/>
-      &nbsp;<input type="checkbox" onClick={() => this.myFunction("CC3101")}/>&nbsp;CC3101 - Matemáticas Discretas para la Computación &nbsp;<br/>
-      &nbsp;<input type="checkbox" onClick={() => this.myFunction("CC3002")}/>&nbsp;CC3002 - Metodologías de Diseño y Programación &nbsp;<br/>
-      &nbsp;<button>Guardar</button>&nbsp;
+        <h3>Seleccionar Cursos</h3>
+
+        {this.state.courses.map(item => (
+          <SidebarElement 
+            year={this.info.year} 
+            semester={this.info.semester} 
+            code={item.ramo.code} 
+            section={item.section}
+            name={item.ramo.name}/>
+        ))}
+
+        <button>Guardar</button>
       </div>
     );
   }
 }
 
 export default class Calendar extends React.Component {
-  showSelected(){
-    window.requestAnimationFrame(
-      function() {
-        if(toShowQuery.length > 0){
-          const elements = document.querySelectorAll(toShowQuery);
-          [...elements].forEach(element => {
-            element.parentElement.style.display = "";
-          })
-        }
-      }
-    )
-  }
   constructor(props) {
     super(props);
+    this.info = {
+      year: 2019,
+      semester: 2
+    };
     this.pathNames = ['Calendario'];
+    this.state = {'evaluations':[]}
+    calendar_class = this;
   }
+
+  createEvents(array) {
+    let ret = [];
+    array.map(evaluation => ret.push({
+          id:ret.length,
+          title: evaluation.course.ramo.code +"-"+ evaluation.course.section +" "+evaluation.title,
+          allDay: false,
+          start: new Date(evaluation.date + " 00:00"),
+          end: new Date(evaluation.date + " 23:59"),          
+          shown:true,
+          url:evaluation.url
+        }));
+    return ret;
+  }
+
+
+
+  componentDidMount() {
+    fetch('http://localhost:8000/evaluations').then(res => res.json()).then(
+      result => this.setState({
+        "evaluations": this.createEvents(result.results.filter(
+                item => item.course.semester.year === this.info.year
+                        && item.course.semester.period === this.info.semester))}),
+      error => console.log(error));
+  }
+
   render() {
+    calendar = <BigCalendar
+              localizer={localizer}
+              events={this.state.evaluations}
+              startAccessor="start"
+              endAccessor="end"
+            />;
     return (
-    <main>
-    <AutoBreadcrumb names={this.pathNames}/>
-    <div id="calendar-wrapper">
-      <Sidebar/>
-      <div style={{height: 500}}>
-      <BigCalendar
-        localizer={localizer}
-        events={exampleEvents}
-        startAccessor="start"
-        endAccessor="end"
-        onRangeChange = {() => this.showSelected()}
-        eventPropGetter={
-          (event, start, end, isSelected) => {
-            let newStyle = {
-              display: "none"
-            };
-            return {
-              style: newStyle
-            };
-          }
-        }
-      />
-      </div>
-      </div>
-    </main>
+      <main>
+        <AutoBreadcrumb names={this.pathNames}/>
+        <div id="calendar-wrapper">
+          <Sidebar/>
+          <div style={{height: 500}}>
+            {calendar}
+          </div>
+        </div>
+      </main>
     );
   }
 }
