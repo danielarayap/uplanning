@@ -9,6 +9,8 @@ from uplanning.parser import parse_spreadsheet
 
 from uplanning.utils import get_fields
 
+from uplanning.filters import EvaluationFilter, CourseFilter
+
 import ipdb
 import csv
 import io
@@ -17,11 +19,12 @@ import io
 class EvaluationViewSet(viewsets.ModelViewSet):
     queryset = Evaluation.objects.all()
     serializer_class = EvaluationSerializer
-    filterset_fields = [
-        *get_fields(Evaluation, exclude=["id"]),
-        "course__semester__year",
-        "course__semester__period",
-        ]
+    filterset_class = EvaluationFilter
+    # filterset_fields = [
+    #     *get_fields(Evaluation, exclude=["id"]),
+    #     "course__semester__year",
+    #     "course__semester__period",
+    #     ]
 
 
 class SemesterViewSet(viewsets.ModelViewSet):
@@ -33,7 +36,7 @@ class SemesterViewSet(viewsets.ModelViewSet):
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
-    filterset_fields = "__all__"
+    filterset_class = CourseFilter
 
 
 class RamoViewSet(viewsets.ModelViewSet):
