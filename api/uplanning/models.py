@@ -12,6 +12,9 @@ class Evaluation(models.Model):
     description = models.TextField(null=True, blank=True)
     course = models.ForeignKey('Course', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{self.title} :: {self.course}"
+
 
 class Semester(models.Model):
     _PERIOD_TYPES = (
@@ -51,6 +54,9 @@ class Course(models.Model):
     teacher = models.ForeignKey('Teacher', on_delete=models.SET_NULL, null=True)
     #horario = models.TextField()
 
+    def __str__(self):
+        return f"{self.ramo.code}-{self.section} {self.ramo.name}"
+
 
 class Ramo(models.Model):
     _SEMESTERS = (
@@ -64,6 +70,9 @@ class Ramo(models.Model):
     code = models.CharField(max_length=100, blank=False)
     name = models.CharField(max_length=100, blank=False)
     nsemester = models.IntegerField(choices=_SEMESTERS)
+
+    def __str__(self):
+        return f"{self.code} {self.name}"
 
 
 class Teacher(models.Model):

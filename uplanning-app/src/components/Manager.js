@@ -12,8 +12,8 @@ export default class Manager extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch('http://localhost:8000/semesters').then(res => res.json()).then(
-			result => this.setState({"semesters":result.results}),
+		fetch(process.env.REACT_APP_API_URL + '/semesters').then(res => res.json()).then(
+			result => this.setState({"semesters":result}),
 			error => console.log(error));
 	}
 
@@ -56,10 +56,6 @@ export default class Manager extends React.Component {
 const state_dict = {"finished":"Finalizado",
 					"preparing":"Por comenzar",
 					"current":"En curso"};
-
-const state_class_dict = {"Por comenzar":"clickable-semester-unfinished",
-						  "En curso":"clickable-semester-open",
-						  "Finalizado":"clickable-semester-closed"};
 
 class SemesterItem extends React.Component {
 	constructor(props) {

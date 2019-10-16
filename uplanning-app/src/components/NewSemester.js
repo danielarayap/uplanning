@@ -3,15 +3,28 @@ import { Alert, Button, Container, Col, Row, InputGroup } from "react-bootstrap"
 import AutoBreadcrumb from "./Breadcrumb";
 
 class SelectSemester extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {"semesters":[]};
+		this.semester_dict = {"1":"Otoño", "2":"Primavera"};
+	}
+
+	componentDidMount() {
+		fetch(process.env.REACT_APP_API_URL + "/semesters/").then(
+			res => res.json()).then(
+			result => this.setState({"semesters":result}),
+			error => console.log(error));
+	}
+
 	render() {
 		return (
 			<InputGroup>
 				<select className="custom-select">
-					<option value="semester1">Otoño 2019</option>
-       	 	    	<option value="semester2">Primavera 2018</option>
-        	    	<option value="semester3">Otoño 2018</option>
-			    	<option value="semester4">Primavera 2017</option>
-        	    	<option value="semester5">Otoño 2017</option>
+					{this.state.semesters.map(item =>						
+						<option value={item.year + "-" + this.semester_dict[item.period]}>
+							{this.semester_dict[item.period] + " " + item.year}
+						</option>
+					)}
 	      	    </select>
 			</InputGroup>
         );

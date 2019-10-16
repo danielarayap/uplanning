@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Button, Container, Col, Row, FormControl, Form, FormGroup } from "react-bootstrap";
 import AutoBreadcrumb from "./Breadcrumb";
 
 export default class NewEvaluation extends React.Component {
@@ -25,33 +25,46 @@ export default class NewEvaluation extends React.Component {
 			"new_evaluation"
 		]
 	}
-
+    // Falta conectar esto a la api para tener el nombre del ramo
 	render() {
 			return (
 				<main>
 				<AutoBreadcrumb names={this.pathNames} paths={this.paths}/>
 				<Container>
-					<h4>Crear Evaluación</h4>
-      			  	<h5>{this.info.course}-{this.info.section}</h5>
+					<h3>Crear Evaluación</h3>
+      			  	<h5>{this.info.course} #NOMBRE_RAMO, Sección {this.info.section}</h5>
+                    <br/>
 	  
-					<form action="http://localhost:8000/evaluations/" method="post">
-      		  			Tipo: <br/>
-				      	<select name="type">
-        					<option value="control">Control</option>
-        					<option value="tarea">Tarea</option>
-		      			</select>
-      		  			<br/>
+					<Form>      		  			
+				      	<FormGroup as={Row} style={{width:"50%"}}>
+                            <Form.Label column sm={2}>Tipo</Form.Label>
+                            <Col sm={10}>
+                            <FormControl as="select">
+                                <option value="control">Control</option>
+                                <option value="tarea">Tarea</option>
+                            </FormControl>
+                            </Col>
+                        </FormGroup>
 
-      		  			Título: <br/>
-      		  			<input name="name" type="text"/> 
-      		  			<br/>     		  			
+                        <FormGroup as={Row} style={{width:"50%"}}>
+                            <Form.Label column sm={2}>Título</Form.Label>
+                            <Col sm={10}>
+                              <Form.Control type="text" placeholder="Título de la evaluación" />
+                            </Col>
+                        </FormGroup>
 
-		     	 		Fecha: <br/>
-		     	 		<input name="date" type="date"/>
+                        <FormGroup as={Row} style={{width:"50%"}}>
+                            <Form.Label column sm={2}>Fecha</Form.Label>
+                            <Col sm={10}>
+                              <Form.Control type="date" />
+                            </Col>
+                        </FormGroup>
 
-		    			<br/><br/>
-						<input type="submit" value="Guardar"/>
-					</form>
+
+                        <Button variant="primary" type="submit">
+                            Guardar
+                        </Button>
+					</Form>
 			</Container>
 	</main>
     	)

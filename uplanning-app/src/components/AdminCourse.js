@@ -110,11 +110,11 @@ export default class AdminCourse extends React.Component {
 	}
 
     componentDidMount() {
-        fetch('http://localhost:8000/courses')
+        fetch(process.env.REACT_APP_API_URL + '/courses')
         .then(res => res.json())
         .then(
           result => this.setState({
-            "course":result.results.filter(
+            "course":result.filter(
               item => item.semester.year === parseInt(this.info.year)
                       && item.semester.period === parseInt(this.info.semester)
                       && item.ramo.code === this.info.code
@@ -122,12 +122,12 @@ export default class AdminCourse extends React.Component {
             "evaluations":this.state.evaluations}),
           error => console.log(error))
         .then(
-          fetch('http://localhost:8000/evaluations')
+          fetch(process.env.REACT_APP_API_URL + '/evaluations')
           .then(res => res.json())
           .then(
             result => this.setState({
             "course": this.state.course,
-            "evaluations": result.results.filter(
+            "evaluations": result.filter(
                 item => item.course.semester.year === parseInt(this.info.year)
                         && item.course.semester.period === parseInt(this.info.semester)
                         && item.course.ramo.code === this.info.code

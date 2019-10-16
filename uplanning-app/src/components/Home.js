@@ -12,6 +12,8 @@ import NewEvaluation from "./NewEvaluation";
 import VisualizeSemester from "./VisualizeSemester";
 import VisualizeCourse from "./VisualizeCourse";
 import ManageEvaluation from "./ManageEvaluation";
+import NewTeacher from "./NewTeacher"
+import NewRamo from "./NewRamo"
 
 const NoMatch = ({ match }) => {
   return (
@@ -35,10 +37,10 @@ export default class Home extends React.Component {
           <Route exact path="/calendar" component={Calendar} />
           <Route exact path="/manage" component={Manager} />
           <Route exact path="/manage/new_semester" component={NewSemester} />
-		  <Route exact path="/manage/:year/:semester" component={AdminSemester} />
-		  <Route exact path="/manage/:year/:semester/new_course" component={NewCourse} />
-		  <Route exact path="/manage/:year/:semester/view" component={VisualizeSemester}/>
-		  <Route
+		      <Route exact path="/manage/:year/:semester" component={AdminSemester} />
+		      <Route exact path="/manage/:year/:semester/new_course" component={NewCourse} />
+		      <Route exact path="/manage/:year/:semester/view" component={VisualizeSemester}/>
+		      <Route
             exact
             path="/manage/:year/:semester/:course/:section"
             component={AdminCourse}
@@ -47,21 +49,31 @@ export default class Home extends React.Component {
             exact
             path="/manage/:year/:semester/:course/:section/new_evaluation"
             component={NewEvaluation}
-	      />
-		  <Route
+          />
+          <Route
+            exact
+            path="/manage/new_teacher"
+            component={NewTeacher}
+          />
+          <Route
+            exact
+            path="/manage/new_ramo"
+            component={NewRamo}
+          />
+		      <Route
             exact
             path="/manage/:year/:semester/:course/:section/view"
             component={VisualizeCourse}
-		  />
-		  <Route
+		      />
+		      <Route
             exact
-			path="/manage/:year/:semester/:course/:section/:type/:name/edit"
+		        path="/manage/:year/:semester/:course/:section/:type/:name/edit"
             component={ManageEvaluation}
           />
           <Route component={NoMatch}/>
-
         </Switch>
       </div>
     );
   }
 }
+
