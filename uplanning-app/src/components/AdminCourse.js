@@ -1,7 +1,8 @@
 import React from "react";
-import { Alert, Button, Container, Row, Col } from "react-bootstrap";
+import { Alert, Button, Container, Form, Row, Col } from "react-bootstrap";
 import AutoBreadcrumb from "./Breadcrumb";
 import OptionButton from "./OptionButton";
+import ViewTitle from "./ViewTitle";
 import { Gear, Trashcan } from "@primer/octicons-react";
 
 class DifferentDayEvaluation extends React.Component {
@@ -144,41 +145,82 @@ export default class AdminCourse extends React.Component {
 			<main>	
 			<AutoBreadcrumb names={this.pathNames} paths={this.paths}/>
 			<Container>
-				<div id="course-info">
-         	 	<h4>{this.info.code} - {name}</h4>
-          		<p>Sección {this.info.section}
-          		<br/>
-		        	Profesor: {teacher}
-          			<br/>
-        	  		Horario: <br/>
-    	      		Lunes 10:15 - 12:00 <br/>
-	          		Miércoles 10:15 - 12:00 <br/>
-          			Viernes 10:15 - 12:00
-	          	</p>
-		        <div id="course-desc">
-        			Descripción de carga para auxiliar/ayudante 
-		            <br/>
-          			<textarea name="desc" value={desc} cols="100" rows="7" style={{resize:'none'}}/>
-		        </div>
-        		<br/>
+				<ViewTitle>{this.info.code} - {name}</ViewTitle>
+				<Row>
+					<Col>
+						<h4>
+							Sección {this.info.section}
+						</h4>
+					</Col>
+				</Row>
+				<Alert variant="secondary" className="mb-5">
+					<Form>
+						<Row>
+							<Col xs={12} md={6}>
+								<Form.Group as={Row} controlId="form-professor">
+									<Form.Label column xs="3" className="font-weight-bold">
+										Profesor
+									</Form.Label>
+									<Col xs={9}>
+										<Form.Control as="select" className="custom-select">
+											<option>{teacher}</option>
+										</Form.Control>
+									</Col>
+								</Form.Group>
+								<Row>
+									<Col xs={3}>
+										<span className="font-weight-bold">
+											Horario:
+										</span>
+									</Col>
+									<Col xs={9}>
+										<ul>
+											<li>
+												Lunes 10:15 - 12:00
+												</li>
+											<li>
+												Miércoles 12:00 - 13:00
+											</li>
+											<li>
+												Viernes 10:15 - 12:00
+											</li>
+										</ul>
+									</Col>	
+								</Row>
+							</Col>
+							<Col xs={12} md={6}>
+								<Form.Group as={Row} controlId="form-description">
+									<Form.Label column xs="3" controlId="aux-description" className="font-weight-bold">
+										Descripción auxiliar y ayudante
+									</Form.Label>
+									<Col xs={9}>
+										<Form.Control as="textarea" className="noresize"/>
+									</Col>
+								</Form.Group>
+								<Button type="sumbit" className="float-right">Actualizar</Button>
+							</Col>
+						</Row>
+					</Form>
+				</Alert>
 
-		        <h5>Evaluaciones</h5>
-				<Button href={this.path + "/new_evaluation"}> Nueva Evaluación</Button>
-		        <div id="course-evals">
-        			<h6>Controles</h6>
-	     	    	<div id="course-controles">
-            			{this.state.evaluations.map(item => (
-                          item.evaluation_type === 1 ? <Evaluation type="control" name={item.title} start={item.date} end={item.date}/> : null
-                        ))}
-          			</div>
-          			<h6>Tareas</h6>
-          			<div id="course-tareas">
-            			{this.state.evaluations.map(item => (
+				<Row>
+					<Col>
+						<h5>Evaluaciones</h5>
+					</Col>
+					<Col xs="auto">
+						<Button href={this.path + "/new_evaluation"}> Nueva Evaluación</Button>
+					</Col>
+				</Row>
+		
+				<h6>Controles</h6>
+            	{this.state.evaluations.map(item => (
+                	item.evaluation_type === 1 ? <Evaluation type="control" name={item.title} start={item.date} end={item.date}/> : null
+                 ))}
+          		
+				<h6>Tareas</h6>
+            	{this.state.evaluations.map(item => (
                           item.evaluation_type === 2 ? <Evaluation type="tarea" name={item.title} start={item.date} end={item.date}/> : null
-                        ))}
-  		        	</div>
-				</div>
-			</div>
+                 ))}
 		</Container>
 		</main>
     );
