@@ -2,7 +2,6 @@ import React from "react";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import AutoBreadcrumb from "./Breadcrumb";
-import exampleEvents from "./exampleEvents";
 import "react-big-calendar/lib/css/react-big-calendar.css"
 
 const localizer = momentLocalizer(moment);
@@ -97,7 +96,7 @@ class Sidebar extends React.Component {
     // Sort courses by code
     this.state.courses.sort((a,b) => a.ramo.code.localeCompare(b.ramo.code));
     return (
-      <div style={{width: "10%"}, {float: "left"}}>
+      <div style={{width: "10%", float: "left"}}>
         <h3>Seleccionar Cursos</h3>
 
         {this.state.courses.map(item => (
