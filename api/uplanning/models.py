@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Evaluation(models.Model):
@@ -82,11 +83,17 @@ class Teacher(models.Model):
         return self.name
 
 class FechasEspeciales(models.Model):
+    _FECHAS_TYPES = (
+        (1, "Feriados"),
+        (2, "Vacaciones"),
+        (3, "Otros"),
+    )
+
     begining = models.DateField()
     ending = models.DateField()
     nombre = models.CharField(max_length=100, blank=False)
-    tipo = models.CharField(max_length=100, blank=False)
-    week =  models.IntegerField(blank=True)
+    tipo = models.IntegerField(choices=_FECHAS_TYPES)
+    
 
 #Tengo duda de como implementar views many to many acá
 class Calendars(models.Model):
