@@ -75,11 +75,14 @@ export default class AdminSemester extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch(process.env.REACT_APP_API_URL + '/courses').then(res => res.json()).then(
+    	const { year, semester } = this.info;
+		fetch(process.env.REACT_APP_API_URL + 
+				`/courses?year=${year}
+				&?semester${semester}`)
+		.then(res => res.json())
+		.then(
 			result => this.setState({
-				"courses":result.filter(
-					item => item.semester.year === parseInt(this.info.year)
-							&& item.semester.period === parseInt(this.info.semester))}),
+				"courses":result }),
 			error => console.log(error));
 	}
 	
