@@ -1,10 +1,7 @@
 from rest_framework import serializers
 # from uplanning.models import Evaluation, Semester
 from uplanning import models
-
-
-def get_fields(model):
-    return [field.attname for field in model._meta.fields]
+from uplanning.utils import get_fields
 
 
 class SemesterSerializer(serializers.HyperlinkedModelSerializer):

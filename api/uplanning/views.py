@@ -15,26 +15,31 @@ import io
 class EvaluationViewSet(viewsets.ModelViewSet):
     queryset = Evaluation.objects.all()
     serializer_class = EvaluationSerializer
+    filterset_fields = "__all__"
 
 
 class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer
+    filterset_fields = "__all__"
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+    filterset_fields = "__all__"
 
 
 class RamoViewSet(viewsets.ModelViewSet):
     queryset = Ramo.objects.all()
     serializer_class = RamoSerializer
+    filterset_fields = "__all__"
 
 
 class TeacherViewSet(viewsets.ModelViewSet):
     queryset = Teacher.objects.all()
     serializer_class = TeacherSerializer
+    filterset_fields = "__all__"
 
 
 # views.py
