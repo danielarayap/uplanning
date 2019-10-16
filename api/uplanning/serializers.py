@@ -29,9 +29,9 @@ class TeacherSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
-    # semester = SemesterSerializer(read_only=True)
-    # teacher = TeacherSerializer(read_only=True)
-    # ramo = RamoSerializer(read_only=True)
+    semester = SemesterSerializer(read_only=True)
+    teacher = TeacherSerializer(read_only=True)
+    ramo = RamoSerializer(read_only=True)
 
     class Meta:
         model = models.Course
@@ -39,8 +39,9 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
-    # course = CourseSerializer(read_only=True)
+    course = CourseSerializer(read_only=True)
 
     class Meta:
         model = models.Evaluation
+        fields = "__all__"
         fields = get_fields(models.Evaluation) + ["url"]

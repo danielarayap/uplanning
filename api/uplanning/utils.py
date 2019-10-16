@@ -20,7 +20,7 @@ def get_fields(model, exclude=[], follow=False):
         raise NotImplementedError("Tranqui, todavia no lo hago xD")
 
     return [
-        field.attname for field
+        field.attname.rsplit("_id", 1)[0] for field
         in model._meta.fields
         if field.attname not in exclude
     ]
