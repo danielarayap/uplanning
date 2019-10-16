@@ -10,11 +10,11 @@ class NewRamo extends React.Component {
 		};
 		this.pathNames = [
 			"Administrar", 
-			"Agregar Profesor"
+			"Crear Ramo"
 		];
 		this.paths = [
 			"manage",
-			"new_teacher"
+			"new_ramo"
 		];
 	}
 

@@ -13,7 +13,7 @@ class NewCourse extends React.Component {
 		this.pathNames = [
 			"Administrar",
 			this.info.year + "-" + this.info.semester,
-			"Nuevo Curso"
+			"Crear Curso"
 		];
 		this.paths = [
 			"manage",
