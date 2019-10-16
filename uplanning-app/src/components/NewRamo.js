@@ -46,3 +46,4 @@ class NewRamo extends React.Component {
 }
 
 export default NewRamo;
+

@@ -73,4 +73,3 @@ class NewCourse extends React.Component {
 }
 
 export default NewCourse;
-

@@ -38,3 +38,4 @@ class NewTeacher extends React.Component {
 }
 
 export default NewTeacher;
+
