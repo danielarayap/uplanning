@@ -10,7 +10,7 @@ class SelectSemester extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch("http://localhost:8000/semesters/").then(
+		fetch(process.env.REACT_APP_API_URL + "/semesters/").then(
 			res => res.json()).then(
 			result => this.setState({"semesters":result}),
 			error => console.log(error));

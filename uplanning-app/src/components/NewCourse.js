@@ -25,7 +25,7 @@ class NewCourse extends React.Component {
 	handleSubmit(event) {
 	  event.preventDefault();
 	  const data = new FormData(event.target);
-	  fetch('http://localhost:8000/courses/', {
+	  fetch(process.env.REACT_APP_API_URL + '/courses/', {
 	    method: 'POST',
 	    body: data,
 	  }).then(response => {

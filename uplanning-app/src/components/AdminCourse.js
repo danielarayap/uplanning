@@ -110,7 +110,7 @@ export default class AdminCourse extends React.Component {
 	}
 
     componentDidMount() {
-        fetch('http://localhost:8000/courses')
+        fetch(process.env.REACT_APP_API_URL + '/courses')
         .then(res => res.json())
         .then(
           result => this.setState({
@@ -122,7 +122,7 @@ export default class AdminCourse extends React.Component {
             "evaluations":this.state.evaluations}),
           error => console.log(error))
         .then(
-          fetch('http://localhost:8000/evaluations')
+          fetch(process.env.REACT_APP_API_URL + '/evaluations')
           .then(res => res.json())
           .then(
             result => this.setState({
