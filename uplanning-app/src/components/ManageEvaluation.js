@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Button, Container, Col, Row, FormControl, Form, FormGroup } from "react-bootstrap";
 import AutoBreadcrumb from "./Breadcrumb";
 
 export default class ManageEvaluation extends React.Component {
@@ -30,35 +30,59 @@ export default class ManageEvaluation extends React.Component {
 			this.info.course + "/" + this.info.section,
 			formattedType + "/" + formattedName + "/edit"
 		]
+		this.state = {"name":this.info.name.replace('-', " ").replace(/^\w/, c => c.toUpperCase())};
 	}
 
+	handleChange(e, self) {
+		self.setState({"name":e.target.value});
+	}
+
+    // Falta conectar esto a la api para tener el nombre del ramo
 	render() {
-			return (
-				<main>
-				<AutoBreadcrumb names={this.pathNames} paths={this.paths}/>
-				<Container>
-					<h4>Editar Evaluacion</h4>
-      			  	<h5>{this.info.course}</h5>
-      		  	  	<h5>Seccion {this.info.section}</h5>
-      		  	  	<h5>{this.info.name.replace('-', " ").replace(/^\w/, c => c.toUpperCase())}</h5>
-					<form action="/" method="get">
-      		  			Tipo: <br/>
-				      	<select>
-        					<option value="control">Control</option>
-		    				<option value="examen">Examen</option>
-        					<option value="tarea">Tarea</option>
-		      			</select>
-      		  			<br/><br/>
-		     	 		Fecha: <br/>
-		     	 		<input type="date"/>
-		     	 		<br/><br/>
-				     	Hora: <br/>
-				     	<input type="time"/> a <input type="time"/>
-		    			<br/><br/>
-						<button type="submit">Guardar</button>
-					</form>
+		return (
+			<main>
+			<AutoBreadcrumb names={this.pathNames} paths={this.paths}/>
+			<Container>
+				<h3>Editar Evaluacion </h3>
+  			  	<h5>{this.info.course} #NOMBRE_RAMO, Sección {this.info.section}</h5>
+                <br/>
+
+				<Form>      		  			
+			      	<FormGroup as={Row} style={{width:"50%"}}>
+                        <Form.Label column sm={2}>Tipo</Form.Label>
+                        <Col sm={10}>
+                        <FormControl as="select">
+                            <option value="control">Control</option>
+                            <option value="tarea">Tarea</option>
+                        </FormControl>
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup as={Row} style={{width:"50%"}}>
+                        <Form.Label column sm={2}>Título</Form.Label>
+                        <Col sm={10}>
+                          <Form.Control 
+                          	type="text" 
+                          	placeholder="Título de la evaluación" 
+                          	value={this.state.name}
+                          	onChange={e => this.handleChange(e, this)} />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup as={Row} style={{width:"50%"}}>
+                        <Form.Label column sm={2}>Fecha</Form.Label>
+                        <Col sm={10}>
+                          <Form.Control type="date" />
+                        </Col>
+                    </FormGroup>
+
+
+                    <Button variant="primary" type="submit">
+                        Guardar
+                    </Button>
+				</Form>
 			</Container>
-	</main>
+		</main>
     	)
   	}
 }

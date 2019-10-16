@@ -57,10 +57,6 @@ const state_dict = {"finished":"Finalizado",
 					"preparing":"Por comenzar",
 					"current":"En curso"};
 
-const state_class_dict = {"Por comenzar":"clickable-semester-unfinished",
-						  "En curso":"clickable-semester-open",
-						  "Finalizado":"clickable-semester-closed"};
-
 class SemesterItem extends React.Component {
 	constructor(props) {
 		super(props);
