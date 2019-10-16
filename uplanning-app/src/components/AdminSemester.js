@@ -3,6 +3,7 @@ import { Alert, Button, Container, Col, Row, Form, InputGroup, FormControl } fro
 import { Gear, Trashcan, Unfold } from "@primer/octicons-react";
 import AutoBreadcrumb from "./Breadcrumb";
 import OptionButton from "./OptionButton";
+import ViewTitle from "./ViewTitle";
 
 class Course extends React.Component {
 	constructor(props) {
@@ -93,9 +94,9 @@ export default class AdminSemester extends React.Component {
 			<main>
 			<AutoBreadcrumb names = {this.pathNames} paths={this.paths}/>
 			<Container>
-				<Row>
-					<Col><h3>Cursos {this.info.year}-{this.info.semester}</h3></Col>
-				</Row>
+				<ViewTitle>
+					Cursos {this.info.year}-{this.info.semester}
+				</ViewTitle>
 				<Row className="mb-3">
 					<Col>
 						<Form inline className="mr-auto">
