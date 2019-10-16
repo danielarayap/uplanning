@@ -12,9 +12,14 @@ import NewEvaluation from "./NewEvaluation";
 import VisualizeSemester from "./VisualizeSemester";
 import VisualizeCourse from "./VisualizeCourse";
 import ManageEvaluation from "./ManageEvaluation";
-import NewTeacher from "./NewTeacher"
-import NewRamo from "./NewRamo"
+import NewTeacher from "./NewTeacher";
+import NewRamo from "./NewRamo";
+import AdminTeachers from "./AdminTeachers";
+import ManageTeacher from "./ManageTeacher";
+import AdminRamos from "./AdminRamos";
+import ManageRamo from "./ManageRamo";
 import NewFechaEspecial from "./NewFechaEspecial"
+
 const NoMatch = ({ match }) => {
   return (
     <h1> Que diablos haces aqui </h1>
@@ -52,12 +57,32 @@ export default class Home extends React.Component {
           />
           <Route
             exact
-            path="/manage/new_teacher"
+            path="/teachers"
+            component={AdminTeachers}
+          />
+          <Route
+            exact
+            path="/teachers/:name"
+            component={ManageTeacher}
+          />
+          <Route
+            exact
+            path="/teachers/new_teacher"
             component={NewTeacher}
           />
           <Route
             exact
-            path="/manage/new_ramo"
+            path="/ramos"
+            component={AdminRamos}
+          />
+          <Route
+            exact
+            path="/ramos/:code"
+            component={ManageRamo}
+          />
+          <Route
+            exact
+            path="/ramos/new_ramo"
             component={NewRamo}
           />
 		      <Route
@@ -67,7 +92,7 @@ export default class Home extends React.Component {
 		      />
 		      <Route
             exact
-		        path="/manage/:year/:semester/:course/:section/:type/:name/edit"
+		        path="/manage/:year/:semester/:course/:section/:type/:name"
             component={ManageEvaluation}
           />
           <Route
