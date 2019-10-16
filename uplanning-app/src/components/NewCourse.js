@@ -44,6 +44,7 @@ class NewCourse extends React.Component {
 		            		<option value = "3">CC5401 - Ingenieria de Software II</option>
 		            		<option value = "4">CC6204 - Deep Learning</option>
 		            	</select>
+		            	<a href="/manage/new_ramo"><button type="button">Nuevo Ramo</button></a>
 		            	<br/><br/>
 
 						Seccion: <br/>
@@ -56,6 +57,7 @@ class NewCourse extends React.Component {
 		            		<option value = "2">Aidan Hogan</option>
 		            		<option value = "3">Nancy Hitschfeld</option>
 		            	</select>
+		            	<a href="/manage/new_teacher"><button type="button">Nuevo Profesor</button></a>
 						<br/><br/>
 
 						Descripcion: <br/>
