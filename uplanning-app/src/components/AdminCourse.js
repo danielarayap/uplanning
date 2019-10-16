@@ -139,15 +139,15 @@ export default class AdminCourse extends React.Component {
           `/evaluations?year=${year}
                        &period=${semester}
                        &course_code=${code}
-                       &scourse_ection${section}`
+                       &course_section=${section}`
       )
     ]);
     const [ [ courseJson ], evalsJson ] = await Promise.all(
       responses.map(res => res.json())
     );
 
-    console.log(courseJson);
-    console.log(evalsJson);
+    console.log("El curso", courseJson);
+    console.log("Evaluaciones", evalsJson);
 
     fetch(courseJson.ramo)
       .then(res => res.json())
@@ -184,13 +184,8 @@ export default class AdminCourse extends React.Component {
   }
 
   render() {
-    const name = this.state.course[0] ? this.state.course[0].ramo.name : "";
-    const teacher = this.state.course[0]
-      ? this.state.course[0].teacher.name
-      : "";
-    const desc = this.state.course[0]
-      ? this.state.course[0].aux_description
-      : "";
+    const { name, teacher, description } = this.state;
+
     return (
       <main>
         <AutoBreadcrumb names={this.pathNames} paths={this.paths} />
@@ -214,7 +209,7 @@ export default class AdminCourse extends React.Component {
               <br />
               <textarea
                 name="desc"
-                value={desc}
+                value={description}
                 cols="100"
                 rows="7"
                 style={{ resize: "none" }}
