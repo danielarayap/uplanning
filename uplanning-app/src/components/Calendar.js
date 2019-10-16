@@ -103,18 +103,18 @@ class Sidebar extends React.Component {
     const { year, semester } = this.info;
     const listUrl = await fetch(
       process.env.REACT_APP_API_URL +
-          `/courses?year=${year}
+        `/courses?year=${year}
                    &period=${semester}`
     ).then(res => res.json());
     // console.log(list);
     const listNameCode = await Promise.all(
       listUrl.map(async item => {
-        const {name, code} = await fetch(item.ramo).then(res => res.json());
-        return {...item, name:name, code:code};
+        const { name, code } = await fetch(item.ramo).then(res => res.json());
+        return { ...item, name: name, code: code };
       })
     );
     console.log(listNameCode);
-    this.setState({courses: listNameCode});
+    this.setState({ courses: listNameCode });
   }
 
   render() {
@@ -148,6 +148,8 @@ export default class Calendar extends React.Component {
     this.pathNames = ["Calendario"];
     this.state = { evaluations: [] };
     calendar_class = this;
+
+    this.createEvents.bind(this);
   }
 
   createEvents(array) {
@@ -156,9 +158,9 @@ export default class Calendar extends React.Component {
       ret.push({
         id: ret.length,
         title:
-          evaluation.course.ramo.code +
+          evaluation.course_code +
           "-" +
-          evaluation.course.section +
+          evaluation.section +
           " " +
           evaluation.title,
         allDay: false,
@@ -171,26 +173,34 @@ export default class Calendar extends React.Component {
     return ret;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { year, semester } = this.info;
-    fetch(
+    const evalsUrl = await fetch(
       process.env.REACT_APP_API_URL +
         `/evaluations?year=${year}&period=${semester}`
-    )
-      .then(res => res.json())
-      .then(result =>
-        this.setState({
-          evaluations: this.createEvents(result)
-        })
-      )
-      .catch(error => console.error(error));
+    ).then(res => res.json());
+
+    // console.log("Lista de evaluaciones!:", evalsUrl.slice(0,10));
+    const evals = await Promise.all(
+      evalsUrl.map(async eval_ => {
+        const { section, ramo } = await fetch(eval_.course).then(res =>
+          res.json()
+        );
+        // console.log(section)
+        const { code: course_code } = await fetch(ramo).then(res => res.json());
+        return { ...eval_, section: section, course_code: course_code };
+      })
+    );
+    // console.log(evals.slice(0, 10))
+    this.setState({ evaluations: evals });
   }
 
   render() {
+    console.log(this.state.evaluations);
     calendar = (
       <BigCalendar
         localizer={localizer}
-        events={this.state.evaluations}
+        events={this.createEvents(this.state.evaluations)}
         startAccessor="start"
         endAccessor="end"
       />
