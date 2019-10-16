@@ -12,6 +12,7 @@ import {
 import { Gear, Trashcan, Unfold } from "@primer/octicons-react";
 import AutoBreadcrumb from "./Breadcrumb";
 import OptionButton from "./OptionButton";
+import ViewTitle from "./ViewTitle";
 
 class Course extends React.Component {
 	constructor(props) {
