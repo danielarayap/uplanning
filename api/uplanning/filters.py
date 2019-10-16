@@ -11,7 +11,7 @@ class EvaluationFilter(filters.FilterSet):
     period = filters.NumberFilter(field_name='course__semester__period')
     semester = filters.NumberFilter(field_name='course__semester')
     course_code = filters.CharFilter(field_name='course__ramo__code')
-    course_section = filter.NumberFilter(field_name='course__section')
+    course_section = filters.NumberFilter(field_name='course__section')
 
     class Meta():
         model = Evaluation
@@ -22,9 +22,10 @@ class CourseFilter(filters.FilterSet):
     """
     Misma nota de arriba
     """
-    year = filters.NumberFilter(field_name='course__semester__year')
-    period = filters.NumberFilter(field_name='course__semester__period')
-    semester = filters.NumberFilter(field_name='course__semester')
+    year = filters.NumberFilter(field_name='semester__year')
+    period = filters.NumberFilter(field_name='semester__period')
+    # semester = filters.NumberFilter(field_name='semester')
+    code = filters.CharFilter(field_name='ramo__code')
 
     class Meta():
         model = Course
