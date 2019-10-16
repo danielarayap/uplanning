@@ -43,3 +43,15 @@ class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Evaluation
         fields = '__all__'
+
+class FechasEspecialesSerializer(serializers.HyperlinkedModelSerializer):
+    
+    class Meta:
+        model = models.FechasEspeciales
+        fields = '__all__'
+
+class CalendarsSerializer(serializers.HyperlinkedModelSerializer):
+    courses = CourseSerializer(many=True)
+    class Meta:
+        model = models.Calendars
+        fields = '__all__'
