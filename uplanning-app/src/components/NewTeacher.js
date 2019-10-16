@@ -13,7 +13,7 @@ class NewTeacher extends React.Component {
 			"Agregar Profesor"
 		];
 		this.paths = [
-			"manage",
+			"teachers",
 			"new_teacher"
 		];
 	}

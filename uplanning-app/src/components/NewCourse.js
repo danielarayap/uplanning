@@ -83,7 +83,7 @@ class NewCourse extends React.Component {
 		            		<option value = "4">CC6204 - Deep Learning</option>
 		            	</select>
 		            	</Col>
-		            	<Button href={"/manage/new_ramo"}>Nuevo Ramo</Button>
+		            	<Button href={"/ramos/new_ramo"}>Nuevo Ramo</Button>
 		            	</Row>
 
 		            	<Row className="ml-0">
@@ -106,7 +106,7 @@ class NewCourse extends React.Component {
 		            		<option value="3">Nancy Hitschfeld</option>
 		            	</select>
 		            	</Col>
-		            	<Button href={"/manage/new_teacher"}>Nuevo Profesor</Button>
+		            	<Button href={"/teachers/new_teacher"}>Nuevo Profesor</Button>
 		            	</Row>
 
 		            	<Row className="ml-0">

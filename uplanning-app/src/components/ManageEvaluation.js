@@ -28,7 +28,7 @@ export default class ManageEvaluation extends React.Component {
 			"manage",
 			this.info.year + "/" + this.info.semester,
 			this.info.course + "/" + this.info.section,
-			formattedType + "/" + formattedName + "/edit"
+			formattedType + "/" + formattedName
 		]
 		this.state = {"name":this.info.name.replace('-', " ").replace(/^\w/, c => c.toUpperCase())};
 	}
