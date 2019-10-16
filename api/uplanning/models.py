@@ -91,8 +91,8 @@ class FechasEspeciales(models.Model):
 
     begining = models.DateField()
     ending = models.DateField()
-    nombre = models.CharField(max_length=100, blank=False)
-    tipo = models.IntegerField(choices=_FECHAS_TYPES)
+    name = models.CharField(max_length=100, blank=False)
+    tiṕo = models.IntegerField(choices=_FECHAS_TYPES)
     
 
 #Tengo duda de como implementar views many to many acá

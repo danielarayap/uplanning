@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Col, Row } from "react-bootstrap";
+import { Button, Container, Col, Row, FormControl, Form, FormGroup } from "react-bootstrap";
 import AutoBreadcrumb from "./Breadcrumb";
 
 class NewRamo extends React.Component {
@@ -48,47 +48,29 @@ class NewRamo extends React.Component {
 					</Row>
 					<Row className="ml-0">
 						<form onSubmit={this.handleSubmit}>
-							<Row>
-								<Col>
-			      					Codigo: 
-			      				</Col>
-			      			</Row>
+							<FormGroup as={Row} style={{width:"50%"}}>
+                            <Form.Label column sm={2}>Código</Form.Label>
+                            <Col sm={10}>
+                              <Form.Control type="text" placeholder="CC-XXXX" />
+                            </Col>
+                        </FormGroup>  
 
-							<Row>
-								<Col className="mb-3">
-			      					<input name="code"/>
-			      				</Col>
-			      			</Row>
+							<FormGroup as={Row} style={{width:"50%"}}>
+                            <Form.Label column sm={2}>Nombre</Form.Label>
+                            <Col sm={10}>
+                              <Form.Control type="text" placeholder="Nombre del curso" />
+                            </Col>
+                        </FormGroup>  
 
-							<Row>
-								<Col>
-			      					Nombre: 
-			      				</Col>
-			      			</Row>
-
-			      			<Row>
-								<Col className="mb-3">
-			      					<input name="name"/>
-			      				</Col>
-			      			</Row>
-
-			      			<Row>
-								<Col>
-			      			Numero Semestre: 
-			      				</Col>
-			      			</Row>
-
-			      			<Row>
-								<Col className="mb-3">
-			      					<input name="nsemester" type="number" min="1"/>
-			      				</Col>
-			      			</Row>
-
-			      			<Row>
-								<Col>
-									<Button type="submit">Guardar</Button>
-			      				</Col>
-			      			</Row>
+			      			<FormGroup as={Row} style={{width:"50%"}}>
+                            <Form.Label column sm={2}>Número de semestre</Form.Label>
+                            <Col sm={10}>
+                              <input name="section" type="number" min="1"/>
+                            </Col>
+                        </FormGroup>  
+			      			 <Button variant="primary" type="submit">
+                            Guardar
+                        </Button>
 						</form>
 					</Row>
 				</Container>

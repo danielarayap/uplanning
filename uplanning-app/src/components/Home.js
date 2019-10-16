@@ -18,6 +18,7 @@ import AdminTeachers from "./AdminTeachers";
 import ManageTeacher from "./ManageTeacher";
 import AdminRamos from "./AdminRamos";
 import ManageRamo from "./ManageRamo";
+import NewFechaEspecial from "./NewFechaEspecial"
 
 const NoMatch = ({ match }) => {
   return (
@@ -93,6 +94,11 @@ export default class Home extends React.Component {
             exact
 		        path="/manage/:year/:semester/:course/:section/:type/:name"
             component={ManageEvaluation}
+          />
+          <Route
+            exact
+            path="/manage/new_fechaespecial"
+            component={NewFechaEspecial}
           />
           <Route component={NoMatch}/>
         </Switch>
