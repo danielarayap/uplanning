@@ -7,21 +7,14 @@ from uplanning.models import Evaluation, Semester, SemesterSpreadSheet, Course, 
 
 from uplanning.parser import parse_spreadsheet
 
-from uplanning.utils import get_fields
-
 import ipdb
-import csv
 import io
 
 
 class EvaluationViewSet(viewsets.ModelViewSet):
     queryset = Evaluation.objects.all()
     serializer_class = EvaluationSerializer
-    filterset_fields = [
-        *get_fields(Evaluation, exclude=["id"]),
-        "course__semester__year",
-        "course__semester__period",
-        ]
+    filterset_fields = ["title", ]
 
 
 class SemesterViewSet(viewsets.ModelViewSet):

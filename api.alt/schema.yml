@@ -1,0 +1,1998 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /evaluations/:
+    get:
+      operationId: listEvaluations
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        url:
+                          type: string
+                          readOnly: true
+                        course:
+                          properties:
+                            url:
+                              type: string
+                              readOnly: true
+                            semester:
+                              properties:
+                                url:
+                                  type: string
+                                  readOnly: true
+                                year:
+                                  type: integer
+                                period:
+                                  enum:
+                                  - 1
+                                  - 2
+                                start:
+                                  type: string
+                                  format: date
+                                finish:
+                                  type: string
+                                  format: date
+                                state:
+                                  enum:
+                                  - 1
+                                  - 2
+                                  - 3
+                              required:
+                              - year
+                              - period
+                              - start
+                              - finish
+                              type: object
+                              readOnly: true
+                            teacher:
+                              properties:
+                                url:
+                                  type: string
+                                  readOnly: true
+                                name:
+                                  type: string
+                                  maxLength: 100
+                              required:
+                              - name
+                              type: object
+                              readOnly: true
+                            ramo:
+                              properties:
+                                url:
+                                  type: string
+                                  readOnly: true
+                                code:
+                                  type: string
+                                  maxLength: 100
+                                name:
+                                  type: string
+                                  maxLength: 100
+                                nsemester:
+                                  enum:
+                                  - 5
+                                  - 6
+                                  - 7
+                                  - 8
+                                  - 9
+                                  - 10
+                              required:
+                              - code
+                              - name
+                              - nsemester
+                              type: object
+                              readOnly: true
+                            section:
+                              type: integer
+                            aux_description:
+                              type: string
+                          required:
+                          - aux_description
+                          type: object
+                          readOnly: true
+                        title:
+                          type: string
+                          maxLength: 100
+                        date:
+                          type: string
+                          format: date
+                        evaluation_type:
+                          enum:
+                          - 1
+                          - 2
+                        description:
+                          type: string
+                          nullable: true
+                      required:
+                      - date
+                      - evaluation_type
+          description: ''
+    post:
+      operationId: createEvaluation
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  maxLength: 100
+                date:
+                  type: string
+                  format: date
+                evaluation_type:
+                  enum:
+                  - 1
+                  - 2
+                description:
+                  type: string
+                  nullable: true
+              required:
+              - date
+              - evaluation_type
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  course:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      semester:
+                        properties:
+                          url:
+                            type: string
+                            readOnly: true
+                          year:
+                            type: integer
+                          period:
+                            enum:
+                            - 1
+                            - 2
+                          start:
+                            type: string
+                            format: date
+                          finish:
+                            type: string
+                            format: date
+                          state:
+                            enum:
+                            - 1
+                            - 2
+                            - 3
+                        required:
+                        - year
+                        - period
+                        - start
+                        - finish
+                        type: object
+                        readOnly: true
+                      teacher:
+                        properties:
+                          url:
+                            type: string
+                            readOnly: true
+                          name:
+                            type: string
+                            maxLength: 100
+                        required:
+                        - name
+                        type: object
+                        readOnly: true
+                      ramo:
+                        properties:
+                          url:
+                            type: string
+                            readOnly: true
+                          code:
+                            type: string
+                            maxLength: 100
+                          name:
+                            type: string
+                            maxLength: 100
+                          nsemester:
+                            enum:
+                            - 5
+                            - 6
+                            - 7
+                            - 8
+                            - 9
+                            - 10
+                        required:
+                        - code
+                        - name
+                        - nsemester
+                        type: object
+                        readOnly: true
+                      section:
+                        type: integer
+                      aux_description:
+                        type: string
+                    required:
+                    - aux_description
+                    type: object
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 100
+                  date:
+                    type: string
+                    format: date
+                  evaluation_type:
+                    enum:
+                    - 1
+                    - 2
+                  description:
+                    type: string
+                    nullable: true
+                required:
+                - date
+                - evaluation_type
+          description: ''
+  /evaluations/{id}/:
+    get:
+      operationId: retrieveEvaluation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this evaluation.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  course:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      semester:
+                        properties:
+                          url:
+                            type: string
+                            readOnly: true
+                          year:
+                            type: integer
+                          period:
+                            enum:
+                            - 1
+                            - 2
+                          start:
+                            type: string
+                            format: date
+                          finish:
+                            type: string
+                            format: date
+                          state:
+                            enum:
+                            - 1
+                            - 2
+                            - 3
+                        required:
+                        - year
+                        - period
+                        - start
+                        - finish
+                        type: object
+                        readOnly: true
+                      teacher:
+                        properties:
+                          url:
+                            type: string
+                            readOnly: true
+                          name:
+                            type: string
+                            maxLength: 100
+                        required:
+                        - name
+                        type: object
+                        readOnly: true
+                      ramo:
+                        properties:
+                          url:
+                            type: string
+                            readOnly: true
+                          code:
+                            type: string
+                            maxLength: 100
+                          name:
+                            type: string
+                            maxLength: 100
+                          nsemester:
+                            enum:
+                            - 5
+                            - 6
+                            - 7
+                            - 8
+                            - 9
+                            - 10
+                        required:
+                        - code
+                        - name
+                        - nsemester
+                        type: object
+                        readOnly: true
+                      section:
+                        type: integer
+                      aux_description:
+                        type: string
+                    required:
+                    - aux_description
+                    type: object
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 100
+                  date:
+                    type: string
+                    format: date
+                  evaluation_type:
+                    enum:
+                    - 1
+                    - 2
+                  description:
+                    type: string
+                    nullable: true
+                required:
+                - date
+                - evaluation_type
+          description: ''
+    put:
+      operationId: updateEvaluation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this evaluation.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  maxLength: 100
+                date:
+                  type: string
+                  format: date
+                evaluation_type:
+                  enum:
+                  - 1
+                  - 2
+                description:
+                  type: string
+                  nullable: true
+              required:
+              - date
+              - evaluation_type
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  course:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      semester:
+                        properties:
+                          url:
+                            type: string
+                            readOnly: true
+                          year:
+                            type: integer
+                          period:
+                            enum:
+                            - 1
+                            - 2
+                          start:
+                            type: string
+                            format: date
+                          finish:
+                            type: string
+                            format: date
+                          state:
+                            enum:
+                            - 1
+                            - 2
+                            - 3
+                        required:
+                        - year
+                        - period
+                        - start
+                        - finish
+                        type: object
+                        readOnly: true
+                      teacher:
+                        properties:
+                          url:
+                            type: string
+                            readOnly: true
+                          name:
+                            type: string
+                            maxLength: 100
+                        required:
+                        - name
+                        type: object
+                        readOnly: true
+                      ramo:
+                        properties:
+                          url:
+                            type: string
+                            readOnly: true
+                          code:
+                            type: string
+                            maxLength: 100
+                          name:
+                            type: string
+                            maxLength: 100
+                          nsemester:
+                            enum:
+                            - 5
+                            - 6
+                            - 7
+                            - 8
+                            - 9
+                            - 10
+                        required:
+                        - code
+                        - name
+                        - nsemester
+                        type: object
+                        readOnly: true
+                      section:
+                        type: integer
+                      aux_description:
+                        type: string
+                    required:
+                    - aux_description
+                    type: object
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 100
+                  date:
+                    type: string
+                    format: date
+                  evaluation_type:
+                    enum:
+                    - 1
+                    - 2
+                  description:
+                    type: string
+                    nullable: true
+                required:
+                - date
+                - evaluation_type
+          description: ''
+    patch:
+      operationId: partial_updateEvaluation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this evaluation.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  maxLength: 100
+                date:
+                  type: string
+                  format: date
+                evaluation_type:
+                  enum:
+                  - 1
+                  - 2
+                description:
+                  type: string
+                  nullable: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  course:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      semester:
+                        properties:
+                          url:
+                            type: string
+                            readOnly: true
+                          year:
+                            type: integer
+                          period:
+                            enum:
+                            - 1
+                            - 2
+                          start:
+                            type: string
+                            format: date
+                          finish:
+                            type: string
+                            format: date
+                          state:
+                            enum:
+                            - 1
+                            - 2
+                            - 3
+                        required:
+                        - year
+                        - period
+                        - start
+                        - finish
+                        type: object
+                        readOnly: true
+                      teacher:
+                        properties:
+                          url:
+                            type: string
+                            readOnly: true
+                          name:
+                            type: string
+                            maxLength: 100
+                        required:
+                        - name
+                        type: object
+                        readOnly: true
+                      ramo:
+                        properties:
+                          url:
+                            type: string
+                            readOnly: true
+                          code:
+                            type: string
+                            maxLength: 100
+                          name:
+                            type: string
+                            maxLength: 100
+                          nsemester:
+                            enum:
+                            - 5
+                            - 6
+                            - 7
+                            - 8
+                            - 9
+                            - 10
+                        required:
+                        - code
+                        - name
+                        - nsemester
+                        type: object
+                        readOnly: true
+                      section:
+                        type: integer
+                      aux_description:
+                        type: string
+                    required:
+                    - aux_description
+                    type: object
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 100
+                  date:
+                    type: string
+                    format: date
+                  evaluation_type:
+                    enum:
+                    - 1
+                    - 2
+                  description:
+                    type: string
+                    nullable: true
+                required:
+                - date
+                - evaluation_type
+          description: ''
+    delete:
+      operationId: destroyEvaluation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this evaluation.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /semesters/:
+    get:
+      operationId: listSemesters
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        url:
+                          type: string
+                          readOnly: true
+                        year:
+                          type: integer
+                        period:
+                          enum:
+                          - 1
+                          - 2
+                        start:
+                          type: string
+                          format: date
+                        finish:
+                          type: string
+                          format: date
+                        state:
+                          enum:
+                          - 1
+                          - 2
+                          - 3
+                      required:
+                      - year
+                      - period
+                      - start
+                      - finish
+          description: ''
+    post:
+      operationId: createSemester
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                year:
+                  type: integer
+                period:
+                  enum:
+                  - 1
+                  - 2
+                start:
+                  type: string
+                  format: date
+                finish:
+                  type: string
+                  format: date
+                state:
+                  enum:
+                  - 1
+                  - 2
+                  - 3
+              required:
+              - year
+              - period
+              - start
+              - finish
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  year:
+                    type: integer
+                  period:
+                    enum:
+                    - 1
+                    - 2
+                  start:
+                    type: string
+                    format: date
+                  finish:
+                    type: string
+                    format: date
+                  state:
+                    enum:
+                    - 1
+                    - 2
+                    - 3
+                required:
+                - year
+                - period
+                - start
+                - finish
+          description: ''
+  /semesters/{id}/:
+    get:
+      operationId: retrieveSemester
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this semester.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  year:
+                    type: integer
+                  period:
+                    enum:
+                    - 1
+                    - 2
+                  start:
+                    type: string
+                    format: date
+                  finish:
+                    type: string
+                    format: date
+                  state:
+                    enum:
+                    - 1
+                    - 2
+                    - 3
+                required:
+                - year
+                - period
+                - start
+                - finish
+          description: ''
+    put:
+      operationId: updateSemester
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this semester.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                year:
+                  type: integer
+                period:
+                  enum:
+                  - 1
+                  - 2
+                start:
+                  type: string
+                  format: date
+                finish:
+                  type: string
+                  format: date
+                state:
+                  enum:
+                  - 1
+                  - 2
+                  - 3
+              required:
+              - year
+              - period
+              - start
+              - finish
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  year:
+                    type: integer
+                  period:
+                    enum:
+                    - 1
+                    - 2
+                  start:
+                    type: string
+                    format: date
+                  finish:
+                    type: string
+                    format: date
+                  state:
+                    enum:
+                    - 1
+                    - 2
+                    - 3
+                required:
+                - year
+                - period
+                - start
+                - finish
+          description: ''
+    patch:
+      operationId: partial_updateSemester
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this semester.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                year:
+                  type: integer
+                period:
+                  enum:
+                  - 1
+                  - 2
+                start:
+                  type: string
+                  format: date
+                finish:
+                  type: string
+                  format: date
+                state:
+                  enum:
+                  - 1
+                  - 2
+                  - 3
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  year:
+                    type: integer
+                  period:
+                    enum:
+                    - 1
+                    - 2
+                  start:
+                    type: string
+                    format: date
+                  finish:
+                    type: string
+                    format: date
+                  state:
+                    enum:
+                    - 1
+                    - 2
+                    - 3
+                required:
+                - year
+                - period
+                - start
+                - finish
+          description: ''
+    delete:
+      operationId: destroySemester
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this semester.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /courses/:
+    get:
+      operationId: listCourses
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        url:
+                          type: string
+                          readOnly: true
+                        semester:
+                          properties:
+                            url:
+                              type: string
+                              readOnly: true
+                            year:
+                              type: integer
+                            period:
+                              enum:
+                              - 1
+                              - 2
+                            start:
+                              type: string
+                              format: date
+                            finish:
+                              type: string
+                              format: date
+                            state:
+                              enum:
+                              - 1
+                              - 2
+                              - 3
+                          required:
+                          - year
+                          - period
+                          - start
+                          - finish
+                          type: object
+                          readOnly: true
+                        teacher:
+                          properties:
+                            url:
+                              type: string
+                              readOnly: true
+                            name:
+                              type: string
+                              maxLength: 100
+                          required:
+                          - name
+                          type: object
+                          readOnly: true
+                        ramo:
+                          properties:
+                            url:
+                              type: string
+                              readOnly: true
+                            code:
+                              type: string
+                              maxLength: 100
+                            name:
+                              type: string
+                              maxLength: 100
+                            nsemester:
+                              enum:
+                              - 5
+                              - 6
+                              - 7
+                              - 8
+                              - 9
+                              - 10
+                          required:
+                          - code
+                          - name
+                          - nsemester
+                          type: object
+                          readOnly: true
+                        section:
+                          type: integer
+                        aux_description:
+                          type: string
+                      required:
+                      - aux_description
+          description: ''
+    post:
+      operationId: createCourse
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                section:
+                  type: integer
+                aux_description:
+                  type: string
+              required:
+              - aux_description
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  semester:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      year:
+                        type: integer
+                      period:
+                        enum:
+                        - 1
+                        - 2
+                      start:
+                        type: string
+                        format: date
+                      finish:
+                        type: string
+                        format: date
+                      state:
+                        enum:
+                        - 1
+                        - 2
+                        - 3
+                    required:
+                    - year
+                    - period
+                    - start
+                    - finish
+                    type: object
+                    readOnly: true
+                  teacher:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      name:
+                        type: string
+                        maxLength: 100
+                    required:
+                    - name
+                    type: object
+                    readOnly: true
+                  ramo:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      code:
+                        type: string
+                        maxLength: 100
+                      name:
+                        type: string
+                        maxLength: 100
+                      nsemester:
+                        enum:
+                        - 5
+                        - 6
+                        - 7
+                        - 8
+                        - 9
+                        - 10
+                    required:
+                    - code
+                    - name
+                    - nsemester
+                    type: object
+                    readOnly: true
+                  section:
+                    type: integer
+                  aux_description:
+                    type: string
+                required:
+                - aux_description
+          description: ''
+  /courses/{id}/:
+    get:
+      operationId: retrieveCourse
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this course.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  semester:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      year:
+                        type: integer
+                      period:
+                        enum:
+                        - 1
+                        - 2
+                      start:
+                        type: string
+                        format: date
+                      finish:
+                        type: string
+                        format: date
+                      state:
+                        enum:
+                        - 1
+                        - 2
+                        - 3
+                    required:
+                    - year
+                    - period
+                    - start
+                    - finish
+                    type: object
+                    readOnly: true
+                  teacher:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      name:
+                        type: string
+                        maxLength: 100
+                    required:
+                    - name
+                    type: object
+                    readOnly: true
+                  ramo:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      code:
+                        type: string
+                        maxLength: 100
+                      name:
+                        type: string
+                        maxLength: 100
+                      nsemester:
+                        enum:
+                        - 5
+                        - 6
+                        - 7
+                        - 8
+                        - 9
+                        - 10
+                    required:
+                    - code
+                    - name
+                    - nsemester
+                    type: object
+                    readOnly: true
+                  section:
+                    type: integer
+                  aux_description:
+                    type: string
+                required:
+                - aux_description
+          description: ''
+    put:
+      operationId: updateCourse
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this course.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                section:
+                  type: integer
+                aux_description:
+                  type: string
+              required:
+              - aux_description
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  semester:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      year:
+                        type: integer
+                      period:
+                        enum:
+                        - 1
+                        - 2
+                      start:
+                        type: string
+                        format: date
+                      finish:
+                        type: string
+                        format: date
+                      state:
+                        enum:
+                        - 1
+                        - 2
+                        - 3
+                    required:
+                    - year
+                    - period
+                    - start
+                    - finish
+                    type: object
+                    readOnly: true
+                  teacher:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      name:
+                        type: string
+                        maxLength: 100
+                    required:
+                    - name
+                    type: object
+                    readOnly: true
+                  ramo:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      code:
+                        type: string
+                        maxLength: 100
+                      name:
+                        type: string
+                        maxLength: 100
+                      nsemester:
+                        enum:
+                        - 5
+                        - 6
+                        - 7
+                        - 8
+                        - 9
+                        - 10
+                    required:
+                    - code
+                    - name
+                    - nsemester
+                    type: object
+                    readOnly: true
+                  section:
+                    type: integer
+                  aux_description:
+                    type: string
+                required:
+                - aux_description
+          description: ''
+    patch:
+      operationId: partial_updateCourse
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this course.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                section:
+                  type: integer
+                aux_description:
+                  type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  semester:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      year:
+                        type: integer
+                      period:
+                        enum:
+                        - 1
+                        - 2
+                      start:
+                        type: string
+                        format: date
+                      finish:
+                        type: string
+                        format: date
+                      state:
+                        enum:
+                        - 1
+                        - 2
+                        - 3
+                    required:
+                    - year
+                    - period
+                    - start
+                    - finish
+                    type: object
+                    readOnly: true
+                  teacher:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      name:
+                        type: string
+                        maxLength: 100
+                    required:
+                    - name
+                    type: object
+                    readOnly: true
+                  ramo:
+                    properties:
+                      url:
+                        type: string
+                        readOnly: true
+                      code:
+                        type: string
+                        maxLength: 100
+                      name:
+                        type: string
+                        maxLength: 100
+                      nsemester:
+                        enum:
+                        - 5
+                        - 6
+                        - 7
+                        - 8
+                        - 9
+                        - 10
+                    required:
+                    - code
+                    - name
+                    - nsemester
+                    type: object
+                    readOnly: true
+                  section:
+                    type: integer
+                  aux_description:
+                    type: string
+                required:
+                - aux_description
+          description: ''
+    delete:
+      operationId: destroyCourse
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this course.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /ramos/:
+    get:
+      operationId: listRamos
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        url:
+                          type: string
+                          readOnly: true
+                        code:
+                          type: string
+                          maxLength: 100
+                        name:
+                          type: string
+                          maxLength: 100
+                        nsemester:
+                          enum:
+                          - 5
+                          - 6
+                          - 7
+                          - 8
+                          - 9
+                          - 10
+                      required:
+                      - code
+                      - name
+                      - nsemester
+          description: ''
+    post:
+      operationId: createRamo
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                code:
+                  type: string
+                  maxLength: 100
+                name:
+                  type: string
+                  maxLength: 100
+                nsemester:
+                  enum:
+                  - 5
+                  - 6
+                  - 7
+                  - 8
+                  - 9
+                  - 10
+              required:
+              - code
+              - name
+              - nsemester
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  code:
+                    type: string
+                    maxLength: 100
+                  name:
+                    type: string
+                    maxLength: 100
+                  nsemester:
+                    enum:
+                    - 5
+                    - 6
+                    - 7
+                    - 8
+                    - 9
+                    - 10
+                required:
+                - code
+                - name
+                - nsemester
+          description: ''
+  /ramos/{id}/:
+    get:
+      operationId: retrieveRamo
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this ramo.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  code:
+                    type: string
+                    maxLength: 100
+                  name:
+                    type: string
+                    maxLength: 100
+                  nsemester:
+                    enum:
+                    - 5
+                    - 6
+                    - 7
+                    - 8
+                    - 9
+                    - 10
+                required:
+                - code
+                - name
+                - nsemester
+          description: ''
+    put:
+      operationId: updateRamo
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this ramo.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                code:
+                  type: string
+                  maxLength: 100
+                name:
+                  type: string
+                  maxLength: 100
+                nsemester:
+                  enum:
+                  - 5
+                  - 6
+                  - 7
+                  - 8
+                  - 9
+                  - 10
+              required:
+              - code
+              - name
+              - nsemester
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  code:
+                    type: string
+                    maxLength: 100
+                  name:
+                    type: string
+                    maxLength: 100
+                  nsemester:
+                    enum:
+                    - 5
+                    - 6
+                    - 7
+                    - 8
+                    - 9
+                    - 10
+                required:
+                - code
+                - name
+                - nsemester
+          description: ''
+    patch:
+      operationId: partial_updateRamo
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this ramo.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                code:
+                  type: string
+                  maxLength: 100
+                name:
+                  type: string
+                  maxLength: 100
+                nsemester:
+                  enum:
+                  - 5
+                  - 6
+                  - 7
+                  - 8
+                  - 9
+                  - 10
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  code:
+                    type: string
+                    maxLength: 100
+                  name:
+                    type: string
+                    maxLength: 100
+                  nsemester:
+                    enum:
+                    - 5
+                    - 6
+                    - 7
+                    - 8
+                    - 9
+                    - 10
+                required:
+                - code
+                - name
+                - nsemester
+          description: ''
+    delete:
+      operationId: destroyRamo
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this ramo.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /teachers/:
+    get:
+      operationId: listTeachers
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        url:
+                          type: string
+                          readOnly: true
+                        name:
+                          type: string
+                          maxLength: 100
+                      required:
+                      - name
+          description: ''
+    post:
+      operationId: createTeacher
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  maxLength: 100
+              required:
+              - name
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 100
+                required:
+                - name
+          description: ''
+  /teachers/{id}/:
+    get:
+      operationId: retrieveTeacher
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this teacher.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 100
+                required:
+                - name
+          description: ''
+    put:
+      operationId: updateTeacher
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this teacher.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  maxLength: 100
+              required:
+              - name
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 100
+                required:
+                - name
+          description: ''
+    patch:
+      operationId: partial_updateTeacher
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this teacher.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  maxLength: 100
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 100
+                required:
+                - name
+          description: ''
+    delete:
+      operationId: destroyTeacher
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this teacher.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /upload/:
+    get:
+      operationId: listSemesterSpreadSheets
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        url:
+                          type: string
+                          readOnly: true
+                        file:
+                          type: string
+                      required:
+                      - file
+          description: ''
+    post:
+      operationId: createSemesterSpreadSheet
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                file:
+                  type: string
+              required:
+              - file
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  file:
+                    type: string
+                required:
+                - file
+          description: ''
+  /upload/{id}/:
+    get:
+      operationId: retrieveSemesterSpreadSheet
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this semester spread sheet.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  url:
+                    type: string
+                    readOnly: true
+                  file:
+                    type: string
+                required:
+                - file
+          description: ''
