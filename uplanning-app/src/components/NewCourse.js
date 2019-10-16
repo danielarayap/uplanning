@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Col, Row } from "react-bootstrap";
+import { Button, Container, Col, Row } from "react-bootstrap";
 import AutoBreadcrumb from "./Breadcrumb";
 
 class NewCourse extends React.Component {
@@ -13,7 +13,7 @@ class NewCourse extends React.Component {
 		this.pathNames = [
 			"Administrar",
 			this.info.year + "-" + this.info.semester,
-			"Nuevo Curso"
+			"Crear Curso"
 		];
 		this.paths = [
 			"manage",
@@ -22,48 +22,109 @@ class NewCourse extends React.Component {
 		];
 	}
 
+	handleSubmit(event) {
+	  event.preventDefault();
+	  const data = new FormData(event.target);
+	  fetch('http://localhost:8000/courses/', {
+	    method: 'POST',
+	    body: data,
+	  }).then(response => {
+    		if (response.status >= 200 && response.status < 300) {
+        		console.log(response);
+        		window.location.href="/agregado"; 
+		        return response;
+      		} else {
+       			console.log('Somthing went wrong');
+       			window.location.href="/error"; 
+      		}
+		});
+	}
+
 	render() {
 		return (
 			<main>
 				<AutoBreadcrumb names={this.pathNames} paths={this.paths}/>
 				<Container>
-					<h4>Crear Curso</h4>
-					<h5>{this.info.year}-{this.info.semester}</h5>
-					<form action="http://localhost:8000/courses/" method="post">
-						Semestre: <br/>
+					<Row>
+						<Col>
+							<h4>Crear Curso</h4>
+						</Col>
+					</Row>
+					<Row>
+						<Col>
+							<h5>{this.info.year}-{this.info.semester}</h5>
+						</Col>
+					</Row>
+					<Row className="ml-0">
+					<form onSubmit={this.handleSubmit}>
+						<Row>
+						<Col>
+						Semestre: 
+						</Col>
+						</Row>
+						<Row>
+						<Col className="mb-3">
 				      	<select name="semester" name="semester">
         					<option value="1">Otoño</option>
         					<option value="2">Primavera</option>
 		      			</select>
-		      			<br/><br/>
+		      			</Col>
+		      			</Row>
 
-						Ramo: <br/>
+		      			<Row className="ml-0">
+						Ramo: 
+						</Row>
+						<Row>
+		      			<Col className="mb-3">
 		            	<select name="ramo">
 			            	<option value = "1">CC1001 - Introduccion a la Programacion</option>
 		            		<option value = "2">CC5206 - Introduccion a la Mineria de Datos</option>
 		            		<option value = "3">CC5401 - Ingenieria de Software II</option>
 		            		<option value = "4">CC6204 - Deep Learning</option>
 		            	</select>
-		            	<br/><br/>
+		            	</Col>
+		            	<Button href={"/manage/new_ramo"}>Nuevo Ramo</Button>
+		            	</Row>
 
-						Seccion: <br/>
+		            	<Row className="ml-0">
+						Seccion: 
+						</Row>
+						<Row>
+		      			<Col className="mb-3">
 						<input name="section" type="number" min="1"/>
-						<br/><br/>
+		            	</Col>
+		            	</Row>
 
-						Profesor: <br/>
+		            	<Row className="ml-0">
+						Profesor: 
+						</Row>
+						<Row>
+		      			<Col className="mb-3">
 		            	<select name="teacher">
-			            	<option value = "1">Nelson Baloian T.</option>
-		            		<option value = "2">Aidan Hogan</option>
-		            		<option value = "3">Nancy Hitschfeld</option>
+			            	<option value="1">Nelson Baloian T.</option>
+		            		<option value="2">Aidan Hogan</option>
+		            		<option value="3">Nancy Hitschfeld</option>
 		            	</select>
-						<br/><br/>
+		            	</Col>
+		            	<Button href={"/manage/new_teacher"}>Nuevo Profesor</Button>
+		            	</Row>
 
-						Descripcion: <br/>
-						<textarea name="aux_description" rows="5" cols="50"/>
-						<br/><br/>
-						<input type="submit" value="Guardar"/>
-						<br/><br/>
+		            	<Row className="ml-0">
+						Descripcion: 
+						</Row>
+						<Row>
+		      			<Col className="mb-3">
+						<textarea name="aux_description" rows="3" cols="70"/>
+		            	</Col>
+		            	</Row>
+
+		            	<Row>
+		            	<Col className="mb-3">
+		            	<Button type="submit">Guardar</Button>
+		            	</Col>
+		            	</Row>
 					</form>
+					</Row>
 				</Container>
 			</main>
 		);
@@ -71,4 +132,3 @@ class NewCourse extends React.Component {
 }
 
 export default NewCourse;
-
