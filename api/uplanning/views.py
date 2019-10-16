@@ -2,8 +2,8 @@ import pprint
 from rest_framework import viewsets, views, mixins, status
 from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
-from uplanning.serializers import EvaluationSerializer, SemesterSerializer, SemesterSpreadSheetSerializer, CourseSerializer, RamoSerializer, TeacherSerializer
-from uplanning.models import Evaluation, Semester, SemesterSpreadSheet, Course, Ramo, Teacher
+from uplanning.serializers import EvaluationSerializer, SemesterSerializer, SemesterSpreadSheetSerializer, CourseSerializer, RamoSerializer, TeacherSerializer, FechasEspecialesSerializer, CalendarsSerializer
+from uplanning.models import Evaluation, Semester, SemesterSpreadSheet, Course, Ramo, Teacher, FechasEspeciales, Calendars 
 
 from uplanning.parser import parse_spreadsheet
 
@@ -111,3 +111,11 @@ class FileUploadViewSet(
             # )
         # return super().create(request)
         # return Response({"status": "yes gud"})
+
+class FechasEspecialesViewSet(viewsets.ModelViewSet):
+    queryset = FechasEspeciales.objects.all()
+    serializer_class = FechasEspecialesSerializer
+
+class CalendarsViewSet(viewsets.ModelViewSet):
+    queryset = Calendars.objects.all()
+    serializer_class = CalendarsSerializer    

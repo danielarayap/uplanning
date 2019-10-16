@@ -9,6 +9,10 @@ router.register(r'courses', views.CourseViewSet)
 router.register(r'ramos', views.RamoViewSet)
 router.register(r'teachers', views.TeacherViewSet)
 router.register(r'upload', views.FileUploadViewSet)
+router.register(r'fechasespeciales', views.FechasEspecialesViewSet)
+router.register(r'calendars', views.CalendarsViewSet)
+#router.register(r'suscription', views.SuscriptionViewSet)
+
 # router.register(r'upload', views.FileUploadView)
 
 urlpatterns = [

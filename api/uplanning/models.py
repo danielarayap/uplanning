@@ -80,3 +80,17 @@ class Teacher(models.Model):
 
     def __str__(self):
         return self.name
+
+class FechasEspeciales(models.Model):
+    begining = models.DateField()
+    ending = models.DateField()
+    nombre = models.CharField(max_length=100, blank=False)
+    tipo = models.CharField(max_length=100, blank=False)
+    week =  models.IntegerField(blank=True)
+
+#Tengo duda de como implementar views many to many acá
+class Calendars(models.Model):
+    courses=  models.ManyToManyField(Course)
+    
+class Suscription(models.Model):
+    calendar= models.ManyToManyField(Calendars)    
