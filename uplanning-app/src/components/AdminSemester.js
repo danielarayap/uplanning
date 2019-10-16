@@ -75,7 +75,7 @@ export default class AdminSemester extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch('http://localhost:8000/courses').then(res => res.json()).then(
+		fetch(process.env.REACT_APP_API_URL + '/courses').then(res => res.json()).then(
 			result => this.setState({
 				"courses":result.filter(
 					item => item.semester.year === parseInt(this.info.year)

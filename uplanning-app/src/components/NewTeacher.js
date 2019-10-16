@@ -21,7 +21,7 @@ class NewTeacher extends React.Component {
 	handleSubmit(event) {
 	  event.preventDefault();
 	  const data = new FormData(event.target);
-	  fetch('http://localhost:8000/teachers/', {
+	  fetch(process.env.REACT_APP_API_URL + '/teachers/', {
 	    method: 'POST',
 	    body: data,
 	  }).then(response => {

@@ -26,7 +26,8 @@ class SidebarElement extends React.Component {
 
 
   componentDidMount() {
-    fetch('http://localhost:8000/evaluations')
+    console.log(process.env.REACT_APP_API_URL)
+    fetch(process.env.REACT_APP_API_URL + '/evaluations')
           .then(res => res.json())
           .then(
             result => this.setState({
@@ -84,7 +85,7 @@ class Sidebar extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8000/courses').then(res => res.json()).then(
+    fetch(process.env.REACT_APP_API_URL + '/courses').then(res => res.json()).then(
       result => this.setState({
         "courses":result.filter(
           item => item.semester.year === this.info.year
@@ -141,7 +142,7 @@ export default class Calendar extends React.Component {
 
 
   componentDidMount() {
-    fetch('http://localhost:8000/evaluations').then(res => res.json()).then(
+    fetch(process.env.REACT_APP_API_URL + '/evaluations').then(res => res.json()).then(
       result => this.setState({
         "evaluations": this.createEvents(result.filter(
                 item => item.course.semester.year === this.info.year
