@@ -71,11 +71,14 @@ class NewRamo extends React.Component {
 					      Numero de Semestre
 					    </Form.Label>
 					    <Col sm="10">
-					      <Form.Control 
-					      	name="nsemester"
-					      	type="number" 
-					      	min="5"
-					      />
+						  <Form.Control as="select" name="nsemester">
+						    <option value="5">Quinto</option>
+						    <option value="6">Sexto</option>
+						    <option value="7">Septimo</option>
+						    <option value="8">Octavo</option>
+						    <option value="9">Noveno</option>
+						    <option value="10">Decimo</option>
+						  </Form.Control>
 					    </Col>
 					  </Form.Group>
 
