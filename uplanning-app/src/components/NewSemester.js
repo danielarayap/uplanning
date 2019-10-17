@@ -56,7 +56,7 @@ class SelectFile extends React.Component {
 		console.log(text.slice(0, 20))
 		try {
 			const response = await fetch(
-				"http://localhost:8000/upload/",
+				process.env.REACT_APP_API_URL + "/upload/",
 				{
 					method: "POST",
 					headers: {
