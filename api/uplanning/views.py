@@ -37,6 +37,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     filterset_class = CourseFilter
+    ordering_fields = ["ramo__code", "section"]
 
 
 class RamoViewSet(viewsets.ModelViewSet):
