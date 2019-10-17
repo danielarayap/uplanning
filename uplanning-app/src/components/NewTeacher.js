@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Col, Row } from "react-bootstrap";
+import { Button, Container, Col, Form, Row } from "react-bootstrap";
 import AutoBreadcrumb from "./Breadcrumb";
 
 class NewTeacher extends React.Component {
@@ -33,7 +33,7 @@ class NewTeacher extends React.Component {
        			console.log('Somthing went wrong');
        			window.location.href="/error"; 
       		}
-		});
+		})
 	}
 
 	render() {
@@ -41,28 +41,21 @@ class NewTeacher extends React.Component {
 			<main>
 				<AutoBreadcrumb names={this.pathNames} paths={this.paths}/>
 				<Container>
-					<Row>
-						<Col>
-							<h4>Agregar Profesor</h4>
-						</Col>
-					</Row>
-					<Row className="ml-0">
-						<form onSubmit={this.handleSubmit}>
-							<Row>
-								<Col>
-									Nombre: 
-								</Col>
-							</Row>
-							<Row>
-								<Col className="mb-3">
-								<input name="name"/>
-								</Col>
-							</Row>
-							<Row className="ml-0">
-								<Button type="submit">Guardar</Button>
-							</Row>
-						</form>
-					</Row>
+					<Form onSubmit={this.handleSubmit}>
+					  <Form.Group as={Row}>
+					    <Form.Label column sm="2">
+					      Nombre
+					    </Form.Label>
+					    <Col sm="10">
+					      <Form.Control 
+					      	name="name"
+					      />
+					    </Col>
+					  </Form.Group>
+					  <Button type="submit">
+					    Guardar
+					  </Button>
+					</Form>
 				</Container>
 			</main>
 		);
@@ -70,4 +63,3 @@ class NewTeacher extends React.Component {
 }
 
 export default NewTeacher;
-

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Col, Row, FormControl, Form, FormGroup } from "react-bootstrap";
+import { Button, Container, Col, Form, Row } from "react-bootstrap";
 import AutoBreadcrumb from "./Breadcrumb";
 
 class NewRamo extends React.Component {
@@ -7,13 +7,14 @@ class NewRamo extends React.Component {
 		super(props);
 		this.path = window.location.pathname;
 		this.info = {
+			
 		};
 		this.pathNames = [
 			"Administrar", 
 			"Crear Ramo"
 		];
 		this.paths = [
-			"manage",
+			"ramos",
 			"new_ramo"
 		];
 	}
@@ -41,38 +42,47 @@ class NewRamo extends React.Component {
 			<main>
 				<AutoBreadcrumb names={this.pathNames} paths={this.paths}/>
 				<Container>
-					<Row>
-						<Col>
-							<h4>Crear Ramo</h4>
-						</Col>
-					</Row>
-					<Row className="ml-0">
-						<form onSubmit={this.handleSubmit}>
-							<FormGroup as={Row} style={{width:"50%"}}>
-                            <Form.Label column sm={2}>Código</Form.Label>
-                            <Col sm={10}>
-                              <Form.Control type="text" placeholder="CC-XXXX" />
-                            </Col>
-                        </FormGroup>  
+					<Form onSubmit={this.handleSubmit}>
 
-							<FormGroup as={Row} style={{width:"50%"}}>
-                            <Form.Label column sm={2}>Nombre</Form.Label>
-                            <Col sm={10}>
-                              <Form.Control type="text" placeholder="Nombre del curso" />
-                            </Col>
-                        </FormGroup>  
+					  <Form.Group as={Row}>
+					    <Form.Label column sm="2">
+					      Codigo
+					    </Form.Label>
+					    <Col sm="10">
+					      <Form.Control 
+					      	name="code"
+					      />
+					    </Col>
+					  </Form.Group>
 
-			      			<FormGroup as={Row} style={{width:"50%"}}>
-                            <Form.Label column sm={2}>Número de semestre</Form.Label>
-                            <Col sm={10}>
-                              <input name="section" type="number" min="1"/>
-                            </Col>
-                        </FormGroup>  
-			      			 <Button variant="primary" type="submit">
-                            Guardar
-                        </Button>
-						</form>
-					</Row>
+					  <Form.Group as={Row}>
+					    <Form.Label column sm="2">
+					      Nombre
+					    </Form.Label>
+					    <Col sm="10">
+					      <Form.Control 
+					      	name="name"
+					      />
+					    </Col>
+					  </Form.Group>
+
+					  <Form.Group as={Row}>
+					    <Form.Label column sm="2">
+					      Numero de Semestre
+					    </Form.Label>
+					    <Col sm="10">
+					      <Form.Control 
+					      	name="nsemester"
+					      	type="number" 
+					      	min="5"
+					      />
+					    </Col>
+					  </Form.Group>
+
+					  <Button type="submit">
+					    Guardar
+					  </Button>
+					</Form>
 				</Container>
 			</main>
 		);

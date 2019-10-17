@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Container, Col, Row } from "react-bootstrap";
+import { Button, Container, Col, Form, Row } from "react-bootstrap";
 import AutoBreadcrumb from "./Breadcrumb";
 
-class NewRamo extends React.Component {
+class ManageRamo extends React.Component {
     constructor(props) {
         super(props);
         this.path = window.location.pathname;
@@ -17,6 +17,7 @@ class NewRamo extends React.Component {
             "ramos",
             this.info.code
         ];
+        this.state = {code:this.info.code}
     }
 
     handleSubmit(event) {
@@ -37,66 +38,63 @@ class NewRamo extends React.Component {
         });
     }
 
+    handleChange(e, self) {
+        self.setState({"code":e.target.value});
+    }
+
     render() {
         return (
             <main>
                 <AutoBreadcrumb names={this.pathNames} paths={this.paths}/>
                 <Container>
-                    <Row>
-                        <Col>
-                            <h4>Crear Ramo</h4>
+                    <Form onSubmit={this.handleSubmit}>
+
+                      <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                          Codigo
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control 
+                            name="code"
+                            value={this.state.code}
+                            onChange={e => this.handleChange(e, this)}
+                          />
                         </Col>
-                    </Row>
-                    <Row className="ml-0">
-                        <form onSubmit={this.handleSubmit}>
-                            <Row>
-                                <Col>
-                                    Codigo: 
-                                </Col>
-                            </Row>
+                      </Form.Group>
 
-                            <Row>
-                                <Col className="mb-3">
-                                    <input name="code"/>
-                                </Col>
-                            </Row>
+                      <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                          Nombre
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control 
+                            name="name"
+                          />
+                        </Col>
+                      </Form.Group>
 
-                            <Row>
-                                <Col>
-                                    Nombre: 
-                                </Col>
-                            </Row>
+                      <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                          Numero de Semestre
+                        </Form.Label>
+                        <Col sm="10">
+                          <Form.Control 
+                            name="nsemester"
+                            type="number" 
+                            min="5"
+                          />
+                        </Col>
+                      </Form.Group>
 
-                            <Row>
-                                <Col className="mb-3">
-                                    <input name="name"/>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                            Numero Semestre: 
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col className="mb-3">
-                                    <input name="nsemester" type="number" min="1"/>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col>
-                                    <Button type="submit">Guardar</Button>
-                                </Col>
-                            </Row>
-                        </form>
-                    </Row>
+                      <Button type="submit">
+                        Guardar
+                      </Button>
+                    </Form>
                 </Container>
             </main>
         );
     }
 }
 
-export default NewRamo;
+export default ManageRamo;
 
