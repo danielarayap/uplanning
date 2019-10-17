@@ -5,9 +5,15 @@ from uplanning.utils import get_fields
 
 
 class SemesterSerializer(serializers.HyperlinkedModelSerializer):
+    # courses = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name="course-detail")
+
     class Meta:
         model = models.Semester
-        fields = get_fields(models.Semester) + ["url"]
+        fields = get_fields(models.Semester) + \
+            [
+                "url",
+                "courses",
+            ]
 
 
 class SemesterSpreadSheetSerializer(serializers.HyperlinkedModelSerializer):
@@ -28,16 +34,6 @@ class TeacherSerializer(serializers.HyperlinkedModelSerializer):
         fields = get_fields(models.Teacher) + ["url"]
 
 
-class CourseSerializer(serializers.HyperlinkedModelSerializer):
-    # semester = SemesterSerializer(read_only=True)
-    # teacher = TeacherSerializer(read_only=True)
-    # ramo = RamoSerializer(read_only=True)
-
-    class Meta:
-        model = models.Course
-        fields = get_fields(models.Course) + ["url"]
-
-
 class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
     # course = CourseSerializer(read_only=True)
 
@@ -45,6 +41,22 @@ class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
         model = models.Evaluation
         fields = "__all__"
         fields = get_fields(models.Evaluation) + ["url"]
+
+
+class CourseSerializer(serializers.HyperlinkedModelSerializer):
+    # semester = SemesterSerializer(read_only=True)
+    # teacher = TeacherSerializer(read_only=True)
+    ramo = RamoSerializer(read_only=True)
+    evaluations = EvaluationSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = models.Course
+        fields = get_fields(models.Course) + \
+            [
+                "url",
+                "evaluations",
+                "ramo",
+            ]
 
 
 class FechasEspecialesSerializer(serializers.HyperlinkedModelSerializer):

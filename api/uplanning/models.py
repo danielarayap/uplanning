@@ -11,7 +11,9 @@ class Evaluation(models.Model):
     date = models.DateField()
     evaluation_type = models.IntegerField(choices=_EVAL_TYPES)
     description = models.TextField(null=True, blank=True)
-    course = models.ForeignKey('Course', on_delete=models.CASCADE)
+    course = models.ForeignKey(
+        'Course', related_name='evaluations', on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return f"{self.title} :: {self.course}"
@@ -31,29 +33,28 @@ class Semester(models.Model):
     period = models.IntegerField(choices=_PERIOD_TYPES)
     start = models.DateField()
     finish = models.DateField()
-    state = models.CharField(choices=_STATE_TYPES, max_length=100, blank=False, default=3)
+    state = models.CharField(
+        choices=_STATE_TYPES, max_length=100, blank=False, default=3
+    )
 
     def __str__(self):
         return "Semestre {}-{}".format(self.year, self.period)
 
 
 class SemesterSpreadSheet(models.Model):
-    # file = models.FileField(upload_to='uploads/')
     text = models.TextField()
-
-    # def save(self, *args, **kwargs):
-    #     print("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
-    #     print(type(self.file))
-    #     super(SemesterSpreadSheet, self).save(*args, **kwargs)
 
 
 class Course(models.Model):
     section = models.IntegerField(blank=True, default=1)
     aux_description = models.TextField()
     ramo = models.ForeignKey('Ramo', on_delete=models.CASCADE)
-    semester = models.ForeignKey('Semester', on_delete=models.CASCADE)
-    teacher = models.ForeignKey('Teacher', on_delete=models.SET_NULL, null=True)
-    #horario = models.TextField()
+    semester = models.ForeignKey(
+        Semester, related_name='courses', on_delete=models.CASCADE
+    )
+    teacher = models.ForeignKey(
+        'Teacher', on_delete=models.SET_NULL, null=True
+    )
 
     def __str__(self):
         return f"{self.ramo.code}-{self.section} {self.ramo.name}"
@@ -82,6 +83,7 @@ class Teacher(models.Model):
     def __str__(self):
         return self.name
 
+
 class FechasEspeciales(models.Model):
     _FECHAS_TYPES = (
         (1, "Feriados"),
@@ -93,11 +95,12 @@ class FechasEspeciales(models.Model):
     ending = models.DateField()
     name = models.CharField(max_length=100, blank=False)
     tiṕo = models.IntegerField(choices=_FECHAS_TYPES)
-    
+
 
 #Tengo duda de como implementar views many to many acá
 class Calendars(models.Model):
-    courses=  models.ManyToManyField(Course)
-    
+    courses = models.ManyToManyField(Course)
+
+
 class Suscription(models.Model):
-    calendar= models.ManyToManyField(Calendars)    
+    calendar = models.ManyToManyField(Calendars)
