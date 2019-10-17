@@ -2,12 +2,20 @@ from rest_framework import serializers
 # from uplanning.models import Evaluation, Semester
 from uplanning import models
 from uplanning.utils import get_fields
+import ipdb
+import pprint
 
 
 class SemesterSerializer(serializers.HyperlinkedModelSerializer):
+    # courses = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name="course-detail")
+
     class Meta:
         model = models.Semester
-        fields = get_fields(models.Semester) + ["url"]
+        fields = get_fields(models.Semester) + \
+            [
+                "url",
+                "courses",
+            ]
 
 
 class SemesterSpreadSheetSerializer(serializers.HyperlinkedModelSerializer):
@@ -28,16 +36,6 @@ class TeacherSerializer(serializers.HyperlinkedModelSerializer):
         fields = get_fields(models.Teacher) + ["url"]
 
 
-class CourseSerializer(serializers.HyperlinkedModelSerializer):
-    # semester = SemesterSerializer(read_only=True)
-    # teacher = TeacherSerializer(read_only=True)
-    # ramo = RamoSerializer(read_only=True)
-
-    class Meta:
-        model = models.Course
-        fields = get_fields(models.Course) + ["url"]
-
-
 class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
     # course = CourseSerializer(read_only=True)
 
@@ -45,6 +43,26 @@ class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
         model = models.Evaluation
         fields = "__all__"
         fields = get_fields(models.Evaluation) + ["url"]
+
+
+class CourseSerializer(serializers.HyperlinkedModelSerializer):
+    # semester = SemesterSerializer(read_only=True)
+    # teacher = TeacherSerializer(read_only=True)
+    # ramobject = RamoSerializer(read_only=False)
+    evaluations = EvaluationSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = models.Course
+        fields = "__all__"
+
+    def to_representation(self, course):
+        ret = super().to_representation(course)
+        ramo = course.ramo
+        ret["name"] = ramo.name
+        ret["code"] = ramo.code
+        # pprint.pprint(ret)
+        # ipdb.set_trace()
+        return ret
 
 
 class FechasEspecialesSerializer(serializers.HyperlinkedModelSerializer):

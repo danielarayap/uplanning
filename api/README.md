@@ -27,3 +27,8 @@ Esto usa python3, no te va a funcionar con python2. Correr los comando en la car
   ```bash
   python3 manage.py runserver
   ```
+
+# Features de la api
+1. Se puede filtrar! Usando querystrings, busca en la interfaz de la api y juega con los filtros para hacerte un idea
+
+2. Nada mas :(
