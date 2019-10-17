@@ -62,13 +62,13 @@ export default class Home extends React.Component {
           />
           <Route
             exact
-            path="/teachers/:name"
-            component={ManageTeacher}
+            path="/teachers/new_teacher"
+            component={NewTeacher}
           />
           <Route
             exact
-            path="/teachers/new_teacher"
-            component={NewTeacher}
+            path="/teachers/:name"
+            component={ManageTeacher}
           />
           <Route
             exact
@@ -77,13 +77,13 @@ export default class Home extends React.Component {
           />
           <Route
             exact
-            path="/ramos/:code"
-            component={ManageRamo}
+            path="/ramos/new_ramo"
+            component={NewRamo}
           />
           <Route
             exact
-            path="/ramos/new_ramo"
-            component={NewRamo}
+            path="/ramos/:code"
+            component={ManageRamo}
           />
 		      <Route
             exact
