@@ -53,23 +53,10 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = models.Course
-        # fields = get_fields(models.Course) + \
-        #     [
-        #         "url",
-        #         "evaluations",
-        #         "ramo",
-        #     ]
-        # fields = ["section",
-        #           "id",
-        #           "ramobject",
-        #           "evaluations",
-        # ]
         fields = "__all__"
 
     def to_representation(self, course):
-        print("HOLA QUE TAL!!!!!")
         ret = super().to_representation(course)
-        # ret.pop('ramo', None)
         ramo = course.ramo
         ret["name"] = ramo.name
         ret["code"] = ramo.code
