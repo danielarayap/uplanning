@@ -2,6 +2,8 @@ from rest_framework import serializers
 # from uplanning.models import Evaluation, Semester
 from uplanning import models
 from uplanning.utils import get_fields
+import ipdb
+import pprint
 
 
 class SemesterSerializer(serializers.HyperlinkedModelSerializer):
@@ -46,17 +48,34 @@ class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
     # semester = SemesterSerializer(read_only=True)
     # teacher = TeacherSerializer(read_only=True)
-    ramo = RamoSerializer(read_only=True)
+    # ramobject = RamoSerializer(read_only=False)
     evaluations = EvaluationSerializer(many=True, read_only=True)
 
     class Meta:
         model = models.Course
-        fields = get_fields(models.Course) + \
-            [
-                "url",
-                "evaluations",
-                "ramo",
-            ]
+        # fields = get_fields(models.Course) + \
+        #     [
+        #         "url",
+        #         "evaluations",
+        #         "ramo",
+        #     ]
+        # fields = ["section",
+        #           "id",
+        #           "ramobject",
+        #           "evaluations",
+        # ]
+        fields = "__all__"
+
+    def to_representation(self, course):
+        print("HOLA QUE TAL!!!!!")
+        ret = super().to_representation(course)
+        # ret.pop('ramo', None)
+        ramo = course.ramo
+        ret["name"] = ramo.name
+        ret["code"] = ramo.code
+        # pprint.pprint(ret)
+        # ipdb.set_trace()
+        return ret
 
 
 class FechasEspecialesSerializer(serializers.HyperlinkedModelSerializer):
